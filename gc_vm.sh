@@ -6,7 +6,7 @@ conda create -n tf2  python=3.5
 conda activate tf2
 
 pip install --upgrade pip
-pip install pandas
+pip install panda
 pip install --upgrade pandas
 pip install tensorflow
 pip install scikit-learn

@@ -164,6 +164,7 @@ def main():
     parser.add_argument( "--evaluate_during_training", action="store_true", help="Rul evaluation during training at each logging step.",)
     parser.add_argument( "--do_lower_case", action="store_true", help="Set this flag if you are using an uncased model.",)
     parser.add_argument( "--gradient_accumulation_steps",type=int,default=1, help="Number of updates steps to accumulate before performing a backward/update pass.",)
+    parser.add_argument("--no_cuda", action="store_true", help="Avoid using CUDA when available")
     parser.add_argument("--learning_rate", default=5e-5, type=float, help="The initial learning rate for Adam.")
     parser.add_argument("--weight_decay", default=0.01, type=float, help="Weight decay if we apply some.")
     parser.add_argument("--adam_epsilon", default=1e-8, type=float, help="Epsilon for Adam optimizer.")
