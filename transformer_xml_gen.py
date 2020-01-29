@@ -1,132 +1,5 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 import os
-# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'eci-workspace-rachel-ce818938681b.json'
-import tensorflow as tf
-"""Translates text into the target language.
-
-Target must be an ISO 639-1 language code.
-See https://g.co/cloud/translate/v2/translate-reference#supported_languages
-"""
-# from google.cloud import translate_v2 as translate
-import pandas as pd
-import six
-import numpy as np
-import re
-# translate_client = translate.Client()
-
-# raw_data = pd.read_pickle('../data/raw_data.pkl')
-# raw_data['text_length'] = raw_data['comment_text'].apply(lambda x: len(x.split(" "))-1)
-# raw_data = raw_data[raw_data['text_length'] > 4]
-# data_len = raw_data.shape[0]
-#
-# import time
-# eng_com = []
-#
-# text = raw_data['comment_text'].values.tolist()
-# text = [comment.decode('utf-8') if isinstance(text, six.binary_type) else comment for comment in text]
-#
-# # since the api requires 100seconds maximum requirement 1000
-# for idx, comment in enumerate(text):
-#     try:
-#         print("idx:",idx)
-#         temp_result = translate_client.translate(comment, target_language='en',source_language='nl')['translatedText']
-#         eng_com.append(temp_result)
-#     except:
-#         print('enter sleeping!')
-#         time.sleep(100.0)
-#         print("idx: ",idx)
-#         temp_result = translate_client.translate(comment, target_language='en',source_language='nl')['translatedText']
-#         eng_com.append(temp_result)
-#
-# # # Text can also be a sequence of strings, in which case this method
-# # # will return a sequence of results for each text.
-# raw_data['english_text'] = eng_com
-# raw_data.to_csv('raw_data_test.csv', index=False)
-
-
-# df1 = pd.read_csv('raw_data2.csv')
-# df2 = pd.read_csv('raw_data3.csv')
-# pd.concat([df1,df2]).to_csv('raw_data.csv',index=False)
-
-
-## write data info tffiles
-# from preproc import *
-# #
-# csv = pd.read_csv("raw_data.csv")
-# print(csv.columns)
-# csv = csv[['comment_text','Huid']]
-# csv['Huid'] = csv['Huid'].astype(int)
-# targets = csv['Huid'].values
-# preproc = Preproc(base_dir ='../data/')
-# input_tensor,inp_lang = preproc.load_dataset(tuple(csv['comment_text'].values.tolist()),pad=False)
-# word_index = [k for k,_ in inp_lang.word_index.items()]
-#
-## write the vocabulary file
-# with open('../data/dutch_text.vocab', 'w') as f:
-#     for item in word_index:
-#         f.write("%s\n" % item)
-
-# print(input_tensor)
-# with tf.python_io.TFRecordWriter("../data/csv.tfrecords") as writer:
-#     for idx,_ in enumerate(targets):
-#         features, label = input_tensor[idx], targets[idx]
-#         example = tf.train.Example()
-#         example.features.feature["features"].int64_list.value.extend(features)
-#         example.features.feature["label"].int64_list.value.append(label)
-#         writer.write(example.SerializeToString())
-
-## read the tfrecord data
-# import tensorflow as tf
-# tf.enable_eager_execution()
-# print(tf.executing_eagerly())
-# filenames = ['../data/csv.tfrecords']
-# raw_dataset = tf.data.TFRecordDataset(filenames)
-#
-# # Create a description of the features.
-# feature_description = {
-#     # 'inputs':tf.io.FixedLenFeature([], tf.int64, default_value=0),
-#     # 'targets': tf.io.FixedLenFeature([], tf.int64, default_value=0),
-#     'features':tf.io.FixedLenSequenceFeature([], tf.int64, default_value=0,allow_missing = True),
-#     'label': tf.io.FixedLenSequenceFeature([], tf.int64, default_value=0,allow_missing = True)
-# }
-# def _parse_function(example_proto):
-#   # Parse the input `tf.Example` proto using the dictionary above.
-#   return tf.io.parse_single_example(example_proto, feature_description)
-#
-# for raw_record in raw_dataset.take(10):
-#   print(repr(raw_record))
-#
-# parsed_dataset = raw_dataset.map(_parse_function)
-# print(parsed_dataset)
-# for parsed_record in parsed_dataset.take(10):
-#   print(repr(parsed_record))
-
-
-# import gpt_2_simple as gpt2
-# import os
-# import requests
-#
-# model_name = "124M"
-# if not os.path.isdir(os.path.join("models", model_name)):
-# 	print(f"Downloading {model_name} model...")
-# 	gpt2.download_gpt2(model_name=model_name)   # model is saved into current directory under /models/124M/
-#
-#
-# file_name = "shakespeare.txt"
-# if not os.path.isfile(file_name):
-# 	url = "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt"
-# 	data = requests.get(url)
-#
-# 	with open(file_name, 'w') as f:
-# 		f.write(data.text)
-#
-# sess = gpt2.start_tf_sess()
-# gpt2.finetune(sess,
-#               file_name,
-#               model_name=model_name,
-#               steps=1000)   # steps is max number of training steps
-#
-# gpt2.generate(sess)
 
 from transformers import XLMTokenizer, XLMWithLMHeadModel,XLMConfig
 import argparse
@@ -213,13 +86,12 @@ def main():
 
     config = XLMConfig().from_pretrained('xlm-mlm-17-1280')
     config.lang_id = config.lang2id['nl']
-    print(config)
     tokenizer = XLMTokenizer.from_pretrained('xlm-mlm-17-1280',config = config)
     model = XLMWithLMHeadModel.from_pretrained('xlm-mlm-17-1280', config = config)
     model.to(args.device)
 
     logger.info("Training/evaluation parameters %s", args)
-
+    logger.info("The configuration information is %s",config)
         # Training
     if args.do_train:
         train_dataset = load_and_cache_examples(args, 'dutchwords', tokenizer, evaluate=False)
@@ -232,11 +104,9 @@ def main():
             os.makedirs(args.output_dir)
 
         logger.info("Saving model checkpoint to %s", args.output_dir)
-        model_to_save = (
-            model.module if hasattr(model, "module") else model
-        )
+        model_to_save = (model.module if hasattr(model, "module") else model)
         model_to_save.save_pretrained(args.output_dir)
-        tokenizer.save_pretrained(args.output_dir)
+        # tokenizer.save_pretrained(args.output_dir)
 
         torch.save(args, os.path.join(args.output_dir, "training_args.bin"))
 
