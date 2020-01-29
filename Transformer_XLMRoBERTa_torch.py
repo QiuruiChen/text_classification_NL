@@ -409,10 +409,6 @@ def main():
 
         torch.save(args, os.path.join(args.output_dir, "training_args.bin"))
 
-        model = model_class.from_pretrained(args.output_dir)
-        tokenizer = tokenizer_class.from_pretrained(args.output_dir)
-        model.to(args.device)
-
     # Evaluation
     results = {}
     # if args.do_eval and args.local_rank in [-1, 0]:

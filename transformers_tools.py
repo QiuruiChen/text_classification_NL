@@ -500,10 +500,10 @@ def train(args, train_dataset, model, tokenizer):
         model, optimizer = amp.initialize(model, optimizer, opt_level=args.fp16_opt_level)
 
     # multi-gpu training (should be after apex fp16 initialization)
-    # if args.n_gpu > 1:
-    #     model = torch.nn.DataParallel(model, device_ids=[0,1])
-    if torch.cuda.is_available() and len(args.deviceIds) > 1:
-        model = torch.nn.DataParallel(model, device_ids=args.deviceIds).to(device=args.device)
+    if args.n_gpu > 1:
+        model = torch.nn.DataParallel(model)
+    # if torch.cuda.is_available() and len(args.deviceIds) > 1:
+    #     model = torch.nn.DataParallel(model, device_ids=args.deviceIds).to(device=args.device)
 
     # Train!
     logger.info("***** Running training *****")
@@ -655,10 +655,10 @@ def evaluate(args, model, tokenizer, prefix=""):
         eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.eval_batch_size)
 
         # multi-gpu eval
-        # if args.n_gpu > 1:
-        #     model = torch.nn.DataParallel(model, device_ids=[0,1])
-        if torch.cuda.is_available() and len(args.deviceIds) > 1:
-            model = torch.nn.DataParallel(model, device_ids=args.deviceIds).to(device=args.device)
+        if args.n_gpu > 1:
+            model = torch.nn.DataParallel(model)
+        # if torch.cuda.is_available() and len(args.deviceIds) > 1:
+        #     model = torch.nn.DataParallel(model, device_ids=args.deviceIds).to(device=args.device)
 
         # Eval!
         logger.info("***** Running evaluation {} *****".format(prefix))

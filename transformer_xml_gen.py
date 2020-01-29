@@ -183,19 +183,21 @@ def main():
 
     # device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
     args.n_gpu = torch.cuda.device_count()
-    if args.n_gpu > 0:
-        args.deviceIds = list(range(args.n_gpu))
-    else:
-        args.deviceIds = []
-
-    if torch.cuda.is_available() and len(args.deviceIds) > 0:
-        # remove any device which doesn't exists
-        args.deviceIds = [int(d) for d in args.deviceIds if 0 <= int(d) < torch.cuda.device_count()]
-        # set args.deviceIds[0] (the master node) as the current device
-        torch.cuda.set_device(args.deviceIds[0])
-        args.device = torch.device("cuda")
-    else:
-        args.device = torch.device('cpu')
+    device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
+    args.device = device
+    # if args.n_gpu > 0:
+    #     args.deviceIds = list(range(args.n_gpu))
+    # else:
+    #     args.deviceIds = []
+    #
+    # if torch.cuda.is_available() and len(args.deviceIds) > 0:
+    #     # remove any device which doesn't exists
+    #     args.deviceIds = [int(d) for d in args.deviceIds if 0 <= int(d) < torch.cuda.device_count()]
+    #     # set args.deviceIds[0] (the master node) as the current device
+    #     torch.cuda.set_device(args.deviceIds[0])
+    #     args.device = torch.device("cuda")
+    # else:
+    #     args.device = torch.device('cpu')
 
 
     print("how many gpu is available?", args.n_gpu)
@@ -214,10 +216,29 @@ def main():
     print(config)
     tokenizer = XLMTokenizer.from_pretrained('xlm-mlm-17-1280',config = config)
     model = XLMWithLMHeadModel.from_pretrained('xlm-mlm-17-1280', config = config)
+    model.to(args.device)
+
     logger.info("Training/evaluation parameters %s", args)
-    train_dataset = load_and_cache_examples(args, 'dutchwords', tokenizer, evaluate=False)
-    global_step, tr_loss = train(args, train_dataset, model, tokenizer)
-    logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
+
+        # Training
+    if args.do_train:
+        train_dataset = load_and_cache_examples(args, 'dutchwords', tokenizer, evaluate=False)
+        global_step, tr_loss = train(args, train_dataset, model, tokenizer)
+        logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
+
+    if args.do_train:
+        # Create output directory if needed
+        if not os.path.exists(args.output_dir):
+            os.makedirs(args.output_dir)
+
+        logger.info("Saving model checkpoint to %s", args.output_dir)
+        model_to_save = (
+            model.module if hasattr(model, "module") else model
+        )
+        model_to_save.save_pretrained(args.output_dir)
+        tokenizer.save_pretrained(args.output_dir)
+
+        torch.save(args, os.path.join(args.output_dir, "training_args.bin"))
 
 if __name__ == "__main__":
     main()
