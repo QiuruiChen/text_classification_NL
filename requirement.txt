@@ -8,4 +8,5 @@ tensor2tensor==1.15.4
 tensorflow==2.1.0
 Keras==2.2.4
 torch==1.4.0
+seqeval==0.0.12
 -e git+https://github.com/huggingface/transformers.git@master#egg=transformers
