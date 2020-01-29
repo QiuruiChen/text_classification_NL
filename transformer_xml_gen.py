@@ -181,13 +181,20 @@ def main():
 
     args = parser.parse_args()
 
-    # device = torch.device("cuda:0" if torch.cuda.is_available() and not args.no_cuda else "cpu")
-    # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    device = torch.device("cuda")
+    # device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
+    if torch.cuda.is_available() and len(args.deviceIds) > 0:
+        # remove any device which doesn't exists
+        args.deviceIds = [int(d) for d in args.deviceIds if 0 <= int(d) < torch.cuda.device_count()]
+        # set args.deviceIds[0] (the master node) as the current device
+        torch.cuda.set_device(args.deviceIds[0])
+        args.device = torch.device("cuda")
+    else:
+        args.device = torch.device('cpu')
+
     args.n_gpu = torch.cuda.device_count()
     print("how many gpu is available?", args.n_gpu)
 
-    args.device = device
+    # args.device = device
     # Setup logging
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s -   %(message)s",
