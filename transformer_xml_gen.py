@@ -181,7 +181,8 @@ def main():
 
     args = parser.parse_args()
 
-    device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
+    # device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     args.n_gpu = torch.cuda.device_count()
     print("how many gpu is available?", args.n_gpu)
 
