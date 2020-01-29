@@ -182,6 +182,12 @@ def main():
     args = parser.parse_args()
 
     # device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
+    args.n_gpu = torch.cuda.device_count()
+    if args.n_gpu > 0:
+        args.deviceIds = list(range(args.n_gpu))
+    else:
+        args.deviceIds = []
+
     if torch.cuda.is_available() and len(args.deviceIds) > 0:
         # remove any device which doesn't exists
         args.deviceIds = [int(d) for d in args.deviceIds if 0 <= int(d) < torch.cuda.device_count()]
@@ -191,7 +197,7 @@ def main():
     else:
         args.device = torch.device('cpu')
 
-    args.n_gpu = torch.cuda.device_count()
+
     print("how many gpu is available?", args.n_gpu)
 
     # args.device = device
