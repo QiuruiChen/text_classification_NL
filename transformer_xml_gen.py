@@ -141,7 +141,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     # Required parameters
-    parser.add_argument("--data_dir",default='../data/', type=str, required=False,
+    parser.add_argument("--data_dir",default='./data/', type=str, required=False,
         help="The input data dir. Should contain the .tsv files (or other data files) for the task.",
     )
     parser.add_argument( "--output_dir", default='./model_saves/transformer_XLM_gen/', type=str, required=False,
