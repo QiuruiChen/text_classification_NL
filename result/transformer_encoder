@@ -1,0 +1,100 @@
+2.0.0
+Processing text dataset
+data shape is: (20000, 45)
+data shape before filtering:  (20000, 47)
+data shape after filtering:  (17626, 47)
+the mean amount of the problems is: 3.0718257120163397
+the median amount of the problem is: 3.0
+the max amount of the problem is: 13
+the min amount of the problems is: 1
+/Applications/condaSoftware/anaconda3/envs/tf2_copy/lib/python3.6/re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+preview 5 samples:
+ 0    maar hij voelt zich wel goed bloeddruk gemeten...
+1           mevr had spierpijn van gisteren te sporten
+5    en spoot eh lantus bij het spuiten zat dhr op ...
+6       dhr spoot op bloedvaten bovenbeen bloedde even
+7    dhr vroeg hoe het zat met de kweek niet terug ...
+Name: comment_text, dtype: object
+Tokenized string is [233, 360, 286, 104, 4, 253, 54]
+The original string: wij zin hier
+233 ----> wi
+360 ----> j
+286 ---->
+104 ----> zi
+4 ----> n
+253 ----> hi
+54 ----> er
+how many training data: 13419
+how many test data: 3355
+2020-01-15 10:44:55.186383: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-15 10:44:55.196693: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f9949ff6550 executing computations on platform Host. Devices:
+2020-01-15 10:44:55.196703: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+the next batch of the dataset is: tf.Tensor(
+[[510   6  24 ...   0   0   0]
+ [510  24  63 ...   0   0   0]
+ [510   6  24 ...   0   0   0]
+ ...
+ [510 150  52 ...   0   0   0]
+ [510 192 113 ...   0   0   0]
+ [510  62 363 ...   0   0   0]], shape=(868, 40), dtype=int64)
+the next batch of the label is: tf.Tensor(
+[[1 0 1 ... 0 0 0]
+ [1 1 0 ... 0 0 1]
+ [0 1 0 ... 0 0 0]
+ ...
+ [1 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 1]
+ [1 0 1 ... 0 0 1]], shape=(868, 16), dtype=int64)
+Latest checkpoint restored!!
+the accuracy for the problem Persoonlijke_zorg
+acc is: 0.4873271889400922
+the accuracy for the problem Medicatie
+acc is: 0.5276497695852534
+the accuracy for the problem Huid
+acc is: 0.7361751152073732
+the accuracy for the problem Circulatie
+acc is: 0.6693548387096774
+the accuracy for the problem Voeding
+acc is: 0.8640552995391705
+the accuracy for the problem Urinewegfunctie
+acc is: 0.8502304147465438
+the accuracy for the problem Neuro_musculaire_skeletfunctie
+acc is: 0.8824884792626728
+the accuracy for the problem Cognitie
+acc is: 0.8709677419354839
+the accuracy for the problem Pijn
+acc is: 0.8928571428571429
+the accuracy for the problem Darmfunctie
+acc is: 0.913594470046083
+the accuracy for the problem Geestelijke_gezondheid
+acc is: 0.9285714285714286
+the accuracy for the problem Ademhaling
+acc is: 0.9423963133640553
+the accuracy for the problem Mantelzorg_zorg_voor_kind_huisgenoot
+acc is: 0.9539170506912442
+the accuracy for the problem Fysieke_activiteit
+acc is: 0.9573732718894009
+the accuracy for the problem Zicht
+acc is: 0.9550691244239631
+the accuracy for the problem other
+acc is: 0.7995391705069125
+Epoch 1 Batch 0 Loss 0.6933 Accuracy 0.8270
+Epoch 1 Loss 0.6933 Accuracy 0.8270
+Input: dochter is zaterdag met hr naar de hapost geweest voor zijn dikke voet waarschijnlijk is dit jicht hr heeft een prednison kuur gekregen gisteravond de tweede tablet ingenomen vanavond derde tablet geven ligt in het kastje
+Predicted translation: [[0.00030708 0.00749397 0.00070459 0.00129494 0.00029358 0.00061285
+  0.00050512 0.00036085 0.00043982 0.00038034 0.00021651 0.00045651
+  0.00042433 0.0003055  0.00036711 0.00068372]]
+Real translation: this is a problem we have to solve .
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.iter
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.iter
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.beta_1
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.beta_1
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.beta_2
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.beta_2
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.decay
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.decay
+WARNING:tensorflow:A checkpoint was restored (e.g. tf.train.Checkpoint.restore or tf.keras.Model.load_weights) but not all checkpointed values were used. See above for specific issues. Use expect_partial() on the load status object, e.g. tf.train.Checkpoint.restore(...).expect_partial(), to silence these warnings, or use assert_consumed() to make the check explicit. See https://www.tensorflow.org/alpha/guide/checkpoints#loading_mechanics for details.
+WARNING:tensorflow:A checkpoint was restored (e.g. tf.train.Checkpoint.restore or tf.keras.Model.load_weights) but not all checkpointed values were used. See above for specific issues. Use expect_partial() on the load status object, e.g. tf.train.Checkpoint.restore(...).expect_partial(), to silence these warnings, or use assert_consumed() to make the check explicit. See https://www.tensorflow.org/alpha/guide/checkpoints#loading_mechanics for details.
+
+Process finished with exit code 0

@@ -1,0 +1,542 @@
+01/25/2020 17:02:56 - WARNING - __main__ -   Process rank: -1, device:cpu, n_gpu: 0, distributed training: False, 16-bits training: False
+01/25/2020 17:02:57 - INFO - transformers.configuration_utils -   loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/xlm-roberta-base-config.json from cache at /Users/rachelchen/.cache/torch/transformers/762ddd751172e9d3229e5da17a459eee6c0dfdc237c718944d0b1a85f06c7e1e.1fa59e6c20804f3caf995eb5188362355ca5808f873c1a80c113e56e5f9ad5f2
+01/25/2020 17:02:57 - INFO - transformers.configuration_utils -   Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 16,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 1,
+  "use_bfloat16": false,
+  "vocab_size": 250002
+}
+
+01/25/2020 17:02:57 - INFO - transformers.tokenization_utils -   loading file https://s3.amazonaws.com/models.huggingface.co/bert/xlm-roberta-base-sentencepiece.bpe.model from cache at /Users/rachelchen/.cache/torch/transformers/0c370616ddfc06067c0634160f749c2cf9d8da2c50e03a2617ce5841c8df3b1d.309f0c29486cffc28e1e40a2ab0ac8f500c203fe080b95f820aa9cb58e5b84ed
+01/25/2020 17:02:59 - INFO - transformers.modeling_utils -   loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/xlm-roberta-base-pytorch_model.bin from cache at /Users/rachelchen/.cache/torch/transformers/f80a708b21cc9b248e8af5a630ad9f887326bbaf0098b9f354427b2463d55346.aeeaca90954dc20ffa2909de722cfbfd455c5bb16d480c5bdf6d7fe79c68c267
+01/25/2020 17:03:07 - INFO - transformers.modeling_utils -   Weights of XLMRobertaForSequenceClassification not initialized from pretrained model: ['classifier.dense.weight', 'classifier.dense.bias', 'classifier.out_proj.weight', 'classifier.out_proj.bias']
+01/25/2020 17:03:07 - INFO - transformers.modeling_utils -   Weights from pretrained model not used in XLMRobertaForSequenceClassification: ['lm_head.bias', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight']
+01/25/2020 17:03:07 - INFO - __main__ -   Training/evaluation parameters Namespace(adam_epsilon=1e-08, config_name='xlm-roberta-base', data_dir='./data/', device=device(type='cpu'), do_eval=False, do_lower_case=False, do_train=True, eval_all_checkpoints=False, evaluate_during_training=False, fp16=False, fp16_opt_level='O1', gradient_accumulation_steps=1, learning_rate=5e-05, local_rank=-1, logging_steps=50, max_grad_norm=1.0, max_seq_length=128, max_steps=-1, model_type='xlmroberta', n_gpu=0, num_train_epochs=1.0, output_dir='./model_saves/Transformer_xmlroberta/', output_mode='classification', save_steps=50, seed=42, server_ip='', server_port='', warmup_steps=0, weight_decay=0.0)
+01/25/2020 17:03:07 - INFO - __main__ -   Loading features from cached file ./data/cached_train_xlm-roberta-base_128_dutchwords
+01/25/2020 17:03:08 - INFO - __main__ -   ***** Running training *****
+01/25/2020 17:03:08 - INFO - __main__ -     Num examples = 19067
+01/25/2020 17:03:08 - INFO - __main__ -     Num Epochs = 1
+01/25/2020 17:03:08 - INFO - __main__ -     Instantaneous batch size per GPU = 64
+01/25/2020 17:03:08 - INFO - __main__ -     Total train batch size (w. parallel, distributed & accumulation) = 64
+01/25/2020 17:03:08 - INFO - __main__ -     Gradient Accumulation steps = 1
+01/25/2020 17:03:08 - INFO - __main__ -     Total optimization steps = 298
+Epoch:   0%|          | 0/1 [00:00<?, ?it/s]
+Iteration:   0%|          | 0/298 [00:00<?, ?it/s]
+Iteration:   0%|          | 1/298 [00:43<3:33:48, 43.19s/it]
+Iteration:   1%|          | 2/298 [01:39<3:51:54, 47.01s/it]
+Iteration:   1%|          | 3/298 [02:30<3:57:25, 48.29s/it]
+Iteration:   1%|▏         | 4/298 [03:18<3:56:32, 48.27s/it]
+Iteration:   2%|▏         | 5/298 [04:06<3:55:10, 48.16s/it]
+Iteration:   2%|▏         | 6/298 [04:54<3:54:39, 48.22s/it]
+Iteration:   2%|▏         | 7/298 [05:42<3:53:19, 48.11s/it]
+Iteration:   3%|▎         | 8/298 [06:29<3:50:30, 47.69s/it]
+Iteration:   3%|▎         | 9/298 [07:15<3:47:18, 47.19s/it]
+Iteration:   3%|▎         | 10/298 [08:03<3:47:25, 47.38s/it]
+Iteration:   4%|▎         | 11/298 [08:49<3:45:04, 47.06s/it]
+Iteration:   4%|▍         | 12/298 [09:38<3:46:34, 47.53s/it]
+Iteration:   4%|▍         | 13/298 [10:24<3:44:23, 47.24s/it]
+Iteration:   5%|▍         | 14/298 [11:12<3:43:37, 47.24s/it]
+Iteration:   5%|▌         | 15/298 [11:58<3:42:25, 47.16s/it]
+Iteration:   5%|▌         | 16/298 [12:46<3:42:41, 47.38s/it]
+Iteration:   6%|▌         | 17/298 [13:34<3:41:58, 47.40s/it]
+Iteration:   6%|▌         | 18/298 [14:21<3:41:06, 47.38s/it]
+Iteration:   6%|▋         | 19/298 [15:09<3:41:16, 47.59s/it]
+Iteration:   7%|▋         | 20/298 [15:56<3:39:28, 47.37s/it]
+Iteration:   7%|▋         | 21/298 [16:46<3:42:43, 48.25s/it]
+Iteration:   7%|▋         | 22/298 [17:36<3:43:08, 48.51s/it]
+Iteration:   8%|▊         | 23/298 [18:26<3:45:00, 49.09s/it]
+Iteration:   8%|▊         | 24/298 [19:14<3:42:36, 48.74s/it]
+Iteration:   8%|▊         | 25/298 [20:04<3:43:20, 49.09s/it]
+Iteration:   9%|▊         | 26/298 [20:54<3:43:42, 49.35s/it]
+Iteration:   9%|▉         | 27/298 [21:44<3:44:27, 49.69s/it]
+Iteration:   9%|▉         | 28/298 [22:34<3:43:50, 49.74s/it]
+Iteration:  10%|▉         | 29/298 [23:23<3:41:53, 49.49s/it]
+Iteration:  10%|█         | 30/298 [24:14<3:42:44, 49.87s/it]
+Iteration:  10%|█         | 31/298 [25:04<3:42:15, 49.95s/it]
+Iteration:  11%|█         | 32/298 [25:57<3:45:47, 50.93s/it]
+Iteration:  11%|█         | 33/298 [26:47<3:42:58, 50.48s/it]
+Iteration:  11%|█▏        | 34/298 [27:38<3:43:17, 50.75s/it]
+Iteration:  12%|█▏        | 35/298 [28:29<3:42:16, 50.71s/it]
+Iteration:  12%|█▏        | 36/298 [29:18<3:39:14, 50.21s/it]
+Iteration:  12%|█▏        | 37/298 [30:07<3:37:26, 49.99s/it]
+Iteration:  13%|█▎        | 38/298 [30:58<3:37:58, 50.30s/it]
+Iteration:  13%|█▎        | 39/298 [31:49<3:38:32, 50.63s/it]
+Iteration:  13%|█▎        | 40/298 [32:41<3:39:28, 51.04s/it]
+Iteration:  14%|█▍        | 41/298 [33:32<3:38:33, 51.02s/it]
+Iteration:  14%|█▍        | 42/298 [34:24<3:37:47, 51.05s/it]
+Iteration:  14%|█▍        | 43/298 [35:14<3:35:51, 50.79s/it]
+Iteration:  15%|█▍        | 44/298 [36:06<3:36:31, 51.15s/it]
+Iteration:  15%|█▌        | 45/298 [36:56<3:34:45, 50.93s/it]
+Iteration:  15%|█▌        | 46/298 [37:48<3:35:10, 51.23s/it]
+Iteration:  16%|█▌        | 47/298 [38:41<3:36:46, 51.82s/it]
+Iteration:  16%|█▌        | 48/298 [39:33<3:35:33, 51.73s/it]
+Iteration:  16%|█▋        | 49/298 [40:23<3:32:31, 51.21s/it]/Applications/condaSoftware/anaconda3/envs/tf2_3/lib/python3.6/site-packages/torch/optim/lr_scheduler.py:224: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
+  warnings.warn("To get the last learning rate computed by the scheduler, "
+01/25/2020 17:44:24 - INFO - transformers.configuration_utils -   Configuration saved in ./model_saves/Transformer_xmlroberta/checkpoint-50/config.json
+01/25/2020 17:44:25 - INFO - transformers.modeling_utils -   Model weights saved in ./model_saves/Transformer_xmlroberta/checkpoint-50/pytorch_model.bin
+01/25/2020 17:44:25 - INFO - __main__ -   Saving model checkpoint to ./model_saves/Transformer_xmlroberta/checkpoint-50
+01/25/2020 17:44:27 - INFO - __main__ -   Saving optimizer and scheduler states to ./model_saves/Transformer_xmlroberta/checkpoint-50
+
+Iteration:  17%|█▋        | 50/298 [41:19<3:37:41, 52.67s/it]{"learning_rate": 4.161073825503356e-05, "loss": 0.45417432248592376, "step": 50}
+
+Iteration:  17%|█▋        | 51/298 [42:08<3:32:58, 51.73s/it]
+Iteration:  17%|█▋        | 52/298 [42:58<3:30:03, 51.23s/it]
+
+
+Iteration:  18%|█▊        | 53/298 [43:53<3:33:49, 52.37s/it]
+Iteration:  18%|█▊        | 54/298 [44:45<3:31:22, 51.98s/it]
+Iteration:  18%|█▊        | 55/298 [45:37<3:31:13, 52.16s/it]
+Iteration:  19%|█▉        | 56/298 [46:29<3:29:35, 51.96s/it]
+Iteration:  19%|█▉        | 57/298 [47:18<3:26:02, 51.30s/it]
+Iteration:  19%|█▉        | 58/298 [48:07<3:21:53, 50.47s/it]
+Iteration:  20%|█▉        | 59/298 [48:57<3:20:08, 50.24s/it]
+Iteration:  20%|██        | 60/298 [49:46<3:17:42, 49.84s/it]
+Iteration:  20%|██        | 61/298 [50:36<3:17:35, 50.02s/it]
+Iteration:  21%|██        | 62/298 [51:23<3:13:34, 49.22s/it]
+Iteration:  21%|██        | 63/298 [52:09<3:08:51, 48.22s/it]
+Iteration:  21%|██▏       | 64/298 [52:59<3:10:10, 48.76s/it]
+Iteration:  22%|██▏       | 65/298 [53:46<3:07:14, 48.22s/it]
+Iteration:  22%|██▏       | 66/298 [54:32<3:03:13, 47.39s/it]
+Iteration:  22%|██▏       | 67/298 [55:20<3:04:02, 47.80s/it]
+Iteration:  23%|██▎       | 68/298 [56:06<3:01:05, 47.24s/it]
+Iteration:  23%|██▎       | 69/298 [56:54<3:00:24, 47.27s/it]
+Iteration:  23%|██▎       | 70/298 [57:38<2:56:48, 46.53s/it]
+Iteration:  24%|██▍       | 71/298 [58:25<2:55:51, 46.48s/it]
+Iteration:  24%|██▍       | 72/298 [59:10<2:54:02, 46.21s/it]
+Iteration:  24%|██▍       | 73/298 [59:57<2:53:48, 46.35s/it]
+Iteration:  25%|██▍       | 74/298 [1:00:44<2:53:48, 46.55s/it]
+Iteration:  25%|██▌       | 75/298 [1:01:34<2:57:16, 47.70s/it]
+Iteration:  26%|██▌       | 76/298 [1:02:26<3:00:57, 48.91s/it]
+Iteration:  26%|██▌       | 77/298 [1:03:15<2:59:36, 48.76s/it]
+Iteration:  26%|██▌       | 78/298 [1:04:03<2:58:34, 48.70s/it]
+Iteration:  27%|██▋       | 79/298 [1:04:53<2:58:55, 49.02s/it]
+Iteration:  27%|██▋       | 80/298 [1:05:42<2:58:09, 49.03s/it]
+Iteration:  27%|██▋       | 81/298 [1:06:30<2:56:41, 48.85s/it]
+Iteration:  28%|██▊       | 82/298 [1:07:19<2:55:12, 48.67s/it]
+Iteration:  28%|██▊       | 83/298 [1:08:07<2:54:22, 48.66s/it]
+Iteration:  28%|██▊       | 84/298 [1:08:57<2:54:42, 48.98s/it]
+Iteration:  29%|██▊       | 85/298 [1:09:47<2:55:13, 49.36s/it]
+Iteration:  29%|██▉       | 86/298 [1:10:34<2:51:41, 48.59s/it]
+Iteration:  29%|██▉       | 87/298 [1:11:20<2:48:07, 47.81s/it]
+Iteration:  30%|██▉       | 88/298 [1:12:07<2:45:57, 47.42s/it]
+Iteration:  30%|██▉       | 89/298 [1:12:52<2:42:50, 46.75s/it]
+Iteration:  30%|███       | 90/298 [1:13:38<2:41:46, 46.67s/it]
+Iteration:  31%|███       | 91/298 [1:14:24<2:39:37, 46.27s/it]
+Iteration:  31%|███       | 92/298 [1:15:11<2:39:39, 46.50s/it]
+Iteration:  31%|███       | 93/298 [1:15:58<2:40:08, 46.87s/it]
+Iteration:  32%|███▏      | 94/298 [1:16:47<2:41:25, 47.48s/it]
+Iteration:  32%|███▏      | 95/298 [1:17:39<2:45:06, 48.80s/it]
+Iteration:  32%|███▏      | 96/298 [1:18:30<2:46:15, 49.38s/it]
+Iteration:  33%|███▎      | 97/298 [1:19:18<2:44:20, 49.06s/it]
+Iteration:  33%|███▎      | 98/298 [1:20:11<2:46:47, 50.04s/it]
+Iteration:  33%|███▎      | 99/298 [1:21:04<2:48:53, 50.92s/it]{"learning_rate": 3.3221476510067115e-05, "loss": 0.40244326591491697, "step": 100}
+01/25/2020 18:25:07 - INFO - transformers.configuration_utils -   Configuration saved in ./model_saves/Transformer_xmlroberta/checkpoint-100/config.json
+01/25/2020 18:25:08 - INFO - transformers.modeling_utils -   Model weights saved in ./model_saves/Transformer_xmlroberta/checkpoint-100/pytorch_model.bin
+01/25/2020 18:25:09 - INFO - __main__ -   Saving model checkpoint to ./model_saves/Transformer_xmlroberta/checkpoint-100
+01/25/2020 18:25:11 - INFO - __main__ -   Saving optimizer and scheduler states to ./model_saves/Transformer_xmlroberta/checkpoint-100
+
+Iteration:  34%|███▎      | 100/298 [1:22:02<2:55:55, 53.31s/it]
+Iteration:  34%|███▍      | 101/298 [1:22:46<2:45:09, 50.30s/it]
+Iteration:  34%|███▍      | 102/298 [1:23:33<2:41:18, 49.38s/it]
+Iteration:  35%|███▍      | 103/298 [1:24:21<2:38:57, 48.91s/it]
+Iteration:  35%|███▍      | 104/298 [1:25:08<2:36:10, 48.30s/it]
+Iteration:  35%|███▌      | 105/298 [1:25:56<2:35:05, 48.22s/it]
+Iteration:  36%|███▌      | 106/298 [1:26:40<2:30:58, 47.18s/it]
+Iteration:  36%|███▌      | 107/298 [1:27:30<2:32:48, 48.00s/it]
+Iteration:  36%|███▌      | 108/298 [1:28:18<2:31:26, 47.83s/it]
+Iteration:  37%|███▋      | 109/298 [1:29:09<2:34:04, 48.91s/it]
+Iteration:  37%|███▋      | 110/298 [1:30:00<2:34:56, 49.45s/it]
+Iteration:  37%|███▋      | 111/298 [1:30:51<2:35:25, 49.87s/it]
+Iteration:  38%|███▊      | 112/298 [1:31:43<2:37:08, 50.69s/it]
+Iteration:  38%|███▊      | 113/298 [1:32:31<2:33:19, 49.73s/it]
+Iteration:  38%|███▊      | 114/298 [1:33:19<2:31:16, 49.33s/it]
+Iteration:  39%|███▊      | 115/298 [1:34:10<2:31:58, 49.83s/it]
+Iteration:  39%|███▉      | 116/298 [1:35:06<2:36:42, 51.66s/it]
+Iteration:  39%|███▉      | 117/298 [1:36:00<2:37:37, 52.25s/it]
+Iteration:  40%|███▉      | 118/298 [1:36:49<2:34:19, 51.44s/it]
+Iteration:  40%|███▉      | 119/298 [1:37:40<2:32:26, 51.10s/it]
+Iteration:  40%|████      | 120/298 [1:38:29<2:29:40, 50.45s/it]
+Iteration:  41%|████      | 121/298 [1:39:18<2:27:43, 50.07s/it]
+Iteration:  41%|████      | 122/298 [1:40:06<2:25:40, 49.66s/it]
+Iteration:  41%|████▏     | 123/298 [1:40:54<2:23:22, 49.16s/it]
+Iteration:  42%|████▏     | 124/298 [1:41:43<2:22:10, 49.03s/it]
+Iteration:  42%|████▏     | 125/298 [1:42:31<2:20:08, 48.61s/it]
+Iteration:  42%|████▏     | 126/298 [1:43:18<2:18:28, 48.31s/it]
+Iteration:  43%|████▎     | 127/298 [1:44:06<2:17:21, 48.20s/it]
+Iteration:  43%|████▎     | 128/298 [1:44:54<2:16:23, 48.14s/it]
+Iteration:  43%|████▎     | 129/298 [1:45:42<2:15:02, 47.94s/it]
+Iteration:  44%|████▎     | 130/298 [1:46:30<2:14:23, 48.00s/it]
+Iteration:  44%|████▍     | 131/298 [1:47:17<2:12:32, 47.62s/it]
+Iteration:  44%|████▍     | 132/298 [1:48:06<2:12:53, 48.03s/it]
+Iteration:  45%|████▍     | 133/298 [1:48:55<2:13:13, 48.44s/it]
+Iteration:  45%|████▍     | 134/298 [1:49:43<2:11:36, 48.15s/it]
+Iteration:  45%|████▌     | 135/298 [1:50:31<2:10:59, 48.22s/it]
+Iteration:  46%|████▌     | 136/298 [1:51:20<2:10:36, 48.38s/it]
+Iteration:  46%|████▌     | 137/298 [1:52:08<2:09:54, 48.41s/it]
+Iteration:  46%|████▋     | 138/298 [1:52:55<2:07:53, 47.96s/it]
+Iteration:  47%|████▋     | 139/298 [1:53:43<2:07:12, 48.00s/it]
+Iteration:  47%|████▋     | 140/298 [1:54:29<2:04:55, 47.44s/it]
+Iteration:  47%|████▋     | 141/298 [1:55:19<2:06:00, 48.16s/it]
+Iteration:  48%|████▊     | 142/298 [1:56:07<2:05:20, 48.21s/it]
+Iteration:  48%|████▊     | 143/298 [1:56:55<2:04:08, 48.05s/it]
+Iteration:  48%|████▊     | 144/298 [1:57:44<2:03:58, 48.30s/it]
+Iteration:  49%|████▊     | 145/298 [1:58:32<2:02:45, 48.14s/it]
+Iteration:  49%|████▉     | 146/298 [1:59:20<2:01:49, 48.09s/it]
+Iteration:  49%|████▉     | 147/298 [2:00:07<2:00:41, 47.96s/it]
+Iteration:  50%|████▉     | 148/298 [2:00:55<1:59:46, 47.91s/it]
+Iteration:  50%|█████     | 149/298 [2:01:44<1:59:29, 48.12s/it]01/25/2020 19:05:42 - INFO - transformers.configuration_utils -   Configuration saved in ./model_saves/Transformer_xmlroberta/checkpoint-150/config.json
+01/25/2020 19:05:43 - INFO - transformers.modeling_utils -   Model weights saved in ./model_saves/Transformer_xmlroberta/checkpoint-150/pytorch_model.bin
+01/25/2020 19:05:43 - INFO - __main__ -   Saving model checkpoint to ./model_saves/Transformer_xmlroberta/checkpoint-150
+01/25/2020 19:05:45 - INFO - __main__ -   Saving optimizer and scheduler states to ./model_saves/Transformer_xmlroberta/checkpoint-150
+
+{"learning_rate": 2.4832214765100674e-05, "loss": 0.4072726672887802, "step": 150}
+Iteration:  50%|█████     | 150/298 [2:02:37<2:02:17, 49.58s/it]
+Iteration:  51%|█████     | 151/298 [2:03:22<1:58:29, 48.36s/it]
+Iteration:  51%|█████     | 152/298 [2:04:10<1:57:26, 48.26s/it]
+Iteration:  51%|█████▏    | 153/298 [2:04:57<1:55:37, 47.84s/it]
+Iteration:  52%|█████▏    | 154/298 [2:05:47<1:56:10, 48.41s/it]
+Iteration:  52%|█████▏    | 155/298 [2:06:34<1:54:10, 47.91s/it]
+Iteration:  52%|█████▏    | 156/298 [2:07:21<1:52:54, 47.70s/it]
+Iteration:  53%|█████▎    | 157/298 [2:08:12<1:54:07, 48.57s/it]
+Iteration:  53%|█████▎    | 158/298 [2:09:00<1:53:13, 48.52s/it]
+Iteration:  53%|█████▎    | 159/298 [2:09:48<1:51:58, 48.34s/it]
+Iteration:  54%|█████▎    | 160/298 [2:10:36<1:51:03, 48.28s/it]
+Iteration:  54%|█████▍    | 161/298 [2:11:25<1:50:26, 48.37s/it]
+Iteration:  54%|█████▍    | 162/298 [2:12:13<1:49:29, 48.30s/it]
+Iteration:  55%|█████▍    | 163/298 [2:13:01<1:48:36, 48.27s/it]
+Iteration:  55%|█████▌    | 164/298 [2:13:50<1:48:05, 48.40s/it]
+Iteration:  55%|█████▌    | 165/298 [2:14:38<1:47:15, 48.39s/it]
+Iteration:  56%|█████▌    | 166/298 [2:15:26<1:46:11, 48.27s/it]
+Iteration:  56%|█████▌    | 167/298 [2:16:15<1:45:42, 48.41s/it]
+Iteration:  56%|█████▋    | 168/298 [2:17:02<1:44:18, 48.14s/it]
+Iteration:  57%|█████▋    | 169/298 [2:17:51<1:43:46, 48.27s/it]
+Iteration:  57%|█████▋    | 170/298 [2:18:38<1:42:23, 48.00s/it]
+Iteration:  57%|█████▋    | 171/298 [2:19:27<1:42:06, 48.24s/it]
+Iteration:  58%|█████▊    | 172/298 [2:20:15<1:41:14, 48.21s/it]
+Iteration:  58%|█████▊    | 173/298 [2:21:05<1:41:15, 48.60s/it]
+Iteration:  58%|█████▊    | 174/298 [2:21:54<1:41:12, 48.97s/it]
+Iteration:  59%|█████▊    | 175/298 [2:22:43<1:40:12, 48.88s/it]
+Iteration:  59%|█████▉    | 176/298 [2:23:32<1:39:23, 48.88s/it]
+Iteration:  59%|█████▉    | 177/298 [2:24:21<1:38:28, 48.83s/it]
+Iteration:  60%|█████▉    | 178/298 [2:25:09<1:37:29, 48.75s/it]
+Iteration:  60%|██████    | 179/298 [2:25:58<1:36:37, 48.72s/it]
+Iteration:  60%|██████    | 180/298 [2:26:47<1:35:53, 48.76s/it]
+Iteration:  61%|██████    | 181/298 [2:27:36<1:35:17, 48.87s/it]
+Iteration:  61%|██████    | 182/298 [2:28:23<1:33:43, 48.48s/it]
+Iteration:  61%|██████▏   | 183/298 [2:29:14<1:33:50, 48.96s/it]
+Iteration:  62%|██████▏   | 184/298 [2:30:02<1:32:36, 48.74s/it]
+Iteration:  62%|██████▏   | 185/298 [2:30:51<1:31:58, 48.83s/it]
+Iteration:  62%|██████▏   | 186/298 [2:31:39<1:30:37, 48.55s/it]
+Iteration:  63%|██████▎   | 187/298 [2:32:26<1:29:05, 48.16s/it]
+Iteration:  63%|██████▎   | 188/298 [2:33:14<1:28:13, 48.12s/it]
+Iteration:  63%|██████▎   | 189/298 [2:34:02<1:27:28, 48.15s/it]
+Iteration:  64%|██████▍   | 190/298 [2:34:48<1:25:32, 47.53s/it]
+Iteration:  64%|██████▍   | 191/298 [2:35:37<1:25:24, 47.89s/it]
+Iteration:  64%|██████▍   | 192/298 [2:36:26<1:25:13, 48.24s/it]
+Iteration:  65%|██████▍   | 193/298 [2:37:16<1:25:24, 48.81s/it]
+Iteration:  65%|██████▌   | 194/298 [2:38:05<1:24:26, 48.72s/it]
+Iteration:  65%|██████▌   | 195/298 [2:38:53<1:23:13, 48.48s/it]
+Iteration:  66%|██████▌   | 196/298 [2:39:43<1:23:15, 48.98s/it]
+Iteration:  66%|██████▌   | 197/298 [2:40:34<1:23:38, 49.69s/it]
+Iteration:  66%|██████▋   | 198/298 [2:41:24<1:22:50, 49.71s/it]
+Iteration:  67%|██████▋   | 199/298 [2:42:13<1:21:54, 49.64s/it]01/25/2020 19:46:09 - INFO - transformers.configuration_utils -   Configuration saved in ./model_saves/Transformer_xmlroberta/checkpoint-200/config.json
+01/25/2020 19:46:11 - INFO - transformers.modeling_utils -   Model weights saved in ./model_saves/Transformer_xmlroberta/checkpoint-200/pytorch_model.bin
+01/25/2020 19:46:11 - INFO - __main__ -   Saving model checkpoint to ./model_saves/Transformer_xmlroberta/checkpoint-200
+{"learning_rate": 1.644295302013423e-05, "loss": 0.4023985975980759, "step": 200}
+01/25/2020 19:46:13 - INFO - __main__ -   Saving optimizer and scheduler states to ./model_saves/Transformer_xmlroberta/checkpoint-200
+
+Iteration:  67%|██████▋   | 200/298 [2:43:05<1:21:56, 50.17s/it]
+Iteration:  67%|██████▋   | 201/298 [2:43:53<1:20:16, 49.65s/it]
+Iteration:  68%|██████▊   | 202/298 [2:44:40<1:18:07, 48.83s/it]
+Iteration:  68%|██████▊   | 203/298 [2:45:29<1:17:07, 48.71s/it]
+Iteration:  68%|██████▊   | 204/298 [2:46:16<1:15:53, 48.45s/it]
+Iteration:  69%|██████▉   | 205/298 [2:47:04<1:14:48, 48.26s/it]
+Iteration:  69%|██████▉   | 206/298 [2:47:50<1:13:04, 47.66s/it]
+Iteration:  69%|██████▉   | 207/298 [2:48:40<1:12:56, 48.09s/it]
+Iteration:  70%|██████▉   | 208/298 [2:49:26<1:11:32, 47.70s/it]
+Iteration:  70%|███████   | 209/298 [2:50:13<1:10:20, 47.43s/it]
+Iteration:  70%|███████   | 210/298 [2:51:01<1:09:34, 47.44s/it]
+Iteration:  71%|███████   | 211/298 [2:51:51<1:09:50, 48.17s/it]
+Iteration:  71%|███████   | 212/298 [2:52:39<1:09:06, 48.22s/it]
+Iteration:  71%|███████▏  | 213/298 [2:53:27<1:08:27, 48.32s/it]
+Iteration:  72%|███████▏  | 214/298 [2:54:18<1:08:41, 49.07s/it]
+Iteration:  72%|███████▏  | 215/298 [2:55:07<1:07:50, 49.04s/it]
+Iteration:  72%|███████▏  | 216/298 [2:55:57<1:07:11, 49.17s/it]
+Iteration:  73%|███████▎  | 217/298 [2:56:44<1:05:31, 48.53s/it]
+Iteration:  73%|███████▎  | 218/298 [2:57:32<1:04:30, 48.39s/it]
+Iteration:  73%|███████▎  | 219/298 [2:58:20<1:03:48, 48.46s/it]
+Iteration:  74%|███████▍  | 220/298 [2:59:08<1:02:43, 48.25s/it]
+Iteration:  74%|███████▍  | 221/298 [2:59:57<1:02:06, 48.40s/it]
+Iteration:  74%|███████▍  | 222/298 [3:00:44<1:00:58, 48.13s/it]
+Iteration:  75%|███████▍  | 223/298 [3:01:34<1:00:35, 48.48s/it]
+Iteration:  75%|███████▌  | 224/298 [3:02:21<59:22, 48.15s/it]
+Iteration:  76%|███████▌  | 225/298 [3:03:10<59:01, 48.52s/it]
+Iteration:  76%|███████▌  | 226/298 [3:03:58<57:56, 48.29s/it]
+Iteration:  76%|███████▌  | 227/298 [3:04:48<57:47, 48.84s/it]
+Iteration:  77%|███████▋  | 228/298 [3:05:37<56:46, 48.66s/it]
+Iteration:  77%|███████▋  | 229/298 [3:06:26<56:13, 48.89s/it]
+Iteration:  77%|███████▋  | 230/298 [3:07:15<55:19, 48.81s/it]
+Iteration:  78%|███████▊  | 231/298 [3:08:03<54:25, 48.75s/it]
+Iteration:  78%|███████▊  | 232/298 [3:08:53<53:50, 48.95s/it]
+Iteration:  78%|███████▊  | 233/298 [3:09:41<52:49, 48.77s/it]
+Iteration:  79%|███████▊  | 234/298 [3:10:29<51:51, 48.62s/it]
+Iteration:  79%|███████▉  | 235/298 [3:11:19<51:18, 48.87s/it]
+Iteration:  79%|███████▉  | 236/298 [3:12:08<50:35, 48.95s/it]
+Iteration:  80%|███████▉  | 237/298 [3:12:56<49:26, 48.63s/it]
+Iteration:  80%|███████▉  | 238/298 [3:13:44<48:31, 48.52s/it]
+Iteration:  80%|████████  | 239/298 [3:14:34<48:06, 48.92s/it]
+Iteration:  81%|████████  | 240/298 [3:15:22<47:08, 48.77s/it]
+Iteration:  81%|████████  | 241/298 [3:16:11<46:12, 48.64s/it]
+Iteration:  81%|████████  | 242/298 [3:16:59<45:18, 48.54s/it]
+Iteration:  82%|████████▏ | 243/298 [3:17:47<44:30, 48.55s/it]
+Iteration:  82%|████████▏ | 244/298 [3:18:35<43:31, 48.37s/it]
+Iteration:  82%|████████▏ | 245/298 [3:19:24<42:50, 48.49s/it]
+Iteration:  83%|████████▎ | 246/298 [3:20:13<42:11, 48.69s/it]
+Iteration:  83%|████████▎ | 247/298 [3:21:00<40:54, 48.12s/it]
+Iteration:  83%|████████▎ | 248/298 [3:21:48<39:55, 47.90s/it]
+Iteration:  84%|████████▎ | 249/298 [3:22:40<40:10, 49.20s/it]01/25/2020 20:26:36 - INFO - transformers.configuration_utils -   Configuration saved in ./model_saves/Transformer_xmlroberta/checkpoint-250/config.json
+01/25/2020 20:26:37 - INFO - transformers.modeling_utils -   Model weights saved in ./model_saves/Transformer_xmlroberta/checkpoint-250/pytorch_model.bin
+01/25/2020 20:26:37 - INFO - __main__ -   Saving model checkpoint to ./model_saves/Transformer_xmlroberta/checkpoint-250
+01/25/2020 20:26:40 - INFO - __main__ -   Saving optimizer and scheduler states to ./model_saves/Transformer_xmlroberta/checkpoint-250
+
+Iteration:  84%|████████▍ | 250/298 [3:23:32<39:58, 49.96s/it]{"learning_rate": 8.053691275167785e-06, "loss": 0.4083247697353363, "step": 250}
+
+Iteration:  84%|████████▍ | 251/298 [3:24:19<38:26, 49.07s/it]
+Iteration:  85%|████████▍ | 252/298 [3:25:06<37:19, 48.67s/it]
+Iteration:  85%|████████▍ | 253/298 [3:25:57<36:57, 49.27s/it]
+Iteration:  85%|████████▌ | 254/298 [3:26:43<35:25, 48.31s/it]
+Iteration:  86%|████████▌ | 255/298 [3:27:30<34:22, 47.98s/it]
+Iteration:  86%|████████▌ | 256/298 [3:28:17<33:18, 47.59s/it]
+Iteration:  86%|████████▌ | 257/298 [3:29:09<33:23, 48.86s/it]
+Iteration:  87%|████████▋ | 258/298 [3:30:04<33:48, 50.70s/it]
+Iteration:  87%|████████▋ | 259/298 [3:30:56<33:10, 51.05s/it]
+Iteration:  87%|████████▋ | 260/298 [3:31:44<31:48, 50.23s/it]
+Iteration:  88%|████████▊ | 261/298 [3:32:30<30:11, 48.96s/it]
+Iteration:  88%|████████▊ | 262/298 [3:33:17<29:06, 48.52s/it]
+Iteration:  88%|████████▊ | 263/298 [3:34:04<28:01, 48.04s/it]
+Iteration:  89%|████████▊ | 264/298 [3:34:53<27:24, 48.37s/it]
+Iteration:  89%|████████▉ | 265/298 [3:35:41<26:32, 48.26s/it]
+Iteration:  89%|████████▉ | 266/298 [3:36:27<25:21, 47.54s/it]
+Iteration:  90%|████████▉ | 267/298 [3:37:14<24:25, 47.28s/it]
+Iteration:  90%|████████▉ | 268/298 [3:38:04<24:02, 48.09s/it]
+
+
+
+Iteration:  90%|█████████ | 269/298 [3:39:05<25:08, 52.02s/it]
+Iteration:  91%|█████████ | 270/298 [3:39:57<24:15, 51.98s/it]
+Iteration:  91%|█████████ | 271/298 [3:40:46<23:01, 51.19s/it]
+Iteration:  91%|█████████▏| 272/298 [3:41:35<21:48, 50.32s/it]
+Iteration:  92%|█████████▏| 273/298 [3:42:23<20:43, 49.73s/it]
+Iteration:  92%|█████████▏| 274/298 [3:43:11<19:40, 49.19s/it]
+Iteration:  92%|█████████▏| 275/298 [3:44:00<18:51, 49.18s/it]
+Iteration:  93%|█████████▎| 276/298 [3:44:49<17:57, 48.96s/it]
+Iteration:  93%|█████████▎| 277/298 [3:45:37<17:07, 48.95s/it]
+Iteration:  93%|█████████▎| 278/298 [3:46:27<16:19, 48.99s/it]
+Iteration:  94%|█████████▎| 279/298 [3:47:13<15:17, 48.30s/it]
+Iteration:  94%|█████████▍| 280/298 [3:48:02<14:34, 48.58s/it]
+Iteration:  94%|█████████▍| 281/298 [3:48:50<13:42, 48.35s/it]
+Iteration:  95%|█████████▍| 282/298 [3:49:40<12:58, 48.64s/it]
+Iteration:  95%|█████████▍| 283/298 [3:50:27<12:06, 48.41s/it]
+Iteration:  95%|█████████▌| 284/298 [3:51:18<11:27, 49.11s/it]
+Iteration:  96%|█████████▌| 285/298 [3:52:05<10:31, 48.55s/it]
+Iteration:  96%|█████████▌| 286/298 [3:52:53<09:38, 48.17s/it]
+Iteration:  96%|█████████▋| 287/298 [3:53:39<08:43, 47.60s/it]
+Iteration:  97%|█████████▋| 288/298 [3:54:27<07:55, 47.60s/it]
+Iteration:  97%|█████████▋| 289/298 [3:55:15<07:11, 47.93s/it]
+Iteration:  97%|█████████▋| 290/298 [3:56:05<06:26, 48.30s/it]
+Iteration:  98%|█████████▊| 291/298 [3:56:57<05:47, 49.67s/it]
+Iteration:  98%|█████████▊| 292/298 [3:57:45<04:53, 48.95s/it]
+Iteration:  98%|█████████▊| 293/298 [3:58:33<04:03, 48.78s/it]
+Iteration:  99%|█████████▊| 294/298 [3:59:22<03:15, 48.88s/it]
+Iteration:  99%|█████████▉| 295/298 [4:00:11<02:26, 48.86s/it]
+Iteration:  99%|█████████▉| 296/298 [4:00:58<01:36, 48.44s/it]
+Iteration: 100%|█████████▉| 297/298 [4:01:50<00:49, 49.24s/it]
+Epoch: 100%|██████████| 1/1 [4:02:35<00:00, 14555.63s/it]
+01/25/2020 21:05:44 - INFO - __main__ -    global_step = 298, average loss = 0.4129926860332489
+01/25/2020 21:05:44 - INFO - __main__ -   Saving model checkpoint to ./model_saves/Transformer_xmlroberta/
+01/25/2020 21:05:44 - INFO - transformers.configuration_utils -   Configuration saved in ./model_saves/Transformer_xmlroberta/config.json
+01/25/2020 21:05:45 - INFO - transformers.modeling_utils -   Model weights saved in ./model_saves/Transformer_xmlroberta/pytorch_model.bin
+01/25/2020 21:05:45 - INFO - transformers.configuration_utils -   loading configuration file ./model_saves/Transformer_xmlroberta/config.json
+01/25/2020 21:05:45 - INFO - transformers.configuration_utils -   Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 16,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 1,
+  "use_bfloat16": false,
+  "vocab_size": 250002
+}
+
+01/25/2020 21:05:45 - INFO - transformers.modeling_utils -   loading weights file ./model_saves/Transformer_xmlroberta/pytorch_model.bin
+01/25/2020 21:05:52 - INFO - transformers.tokenization_utils -   Model name './model_saves/Transformer_xmlroberta/' not found in model shortcut name list (xlm-roberta-base, xlm-roberta-large, xlm-roberta-large-finetuned-conll02-dutch, xlm-roberta-large-finetuned-conll02-spanish, xlm-roberta-large-finetuned-conll03-english, xlm-roberta-large-finetuned-conll03-german). Assuming './model_saves/Transformer_xmlroberta/' is a path or url to a directory containing tokenizer files.
+01/25/2020 21:05:52 - INFO - transformers.tokenization_utils -   loading file ./model_saves/Transformer_xmlroberta/sentencepiece.bpe.model
+01/25/2020 21:05:52 - INFO - transformers.tokenization_utils -   loading file ./model_saves/Transformer_xmlroberta/added_tokens.json
+01/25/2020 21:05:52 - INFO - transformers.tokenization_utils -   loading file ./model_saves/Transformer_xmlroberta/special_tokens_map.json
+01/25/2020 21:05:52 - INFO - transformers.tokenization_utils -   loading file ./model_saves/Transformer_xmlroberta/tokenizer_config.json
+
+Process finished with exit code 0
+
+===============================
+01/27/2020 10:14:11 - WARNING - __main__ -   Process rank: -1, device:cpu, n_gpu: 0, distributed training: False, 16-bits training: False
+01/27/2020 10:14:11 - INFO - transformers.configuration_utils -   loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/xlm-roberta-base-config.json from cache at /Users/rachelchen/.cache/torch/transformers/762ddd751172e9d3229e5da17a459eee6c0dfdc237c718944d0b1a85f06c7e1e.1fa59e6c20804f3caf995eb5188362355ca5808f873c1a80c113e56e5f9ad5f2
+01/27/2020 10:14:11 - INFO - transformers.configuration_utils -   Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 16,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 1,
+  "use_bfloat16": false,
+  "vocab_size": 250002
+}
+
+01/27/2020 10:14:11 - INFO - transformers.tokenization_utils -   loading file https://s3.amazonaws.com/models.huggingface.co/bert/xlm-roberta-base-sentencepiece.bpe.model from cache at /Users/rachelchen/.cache/torch/transformers/0c370616ddfc06067c0634160f749c2cf9d8da2c50e03a2617ce5841c8df3b1d.309f0c29486cffc28e1e40a2ab0ac8f500c203fe080b95f820aa9cb58e5b84ed
+01/27/2020 10:14:12 - INFO - transformers.modeling_utils -   loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/xlm-roberta-base-pytorch_model.bin from cache at /Users/rachelchen/.cache/torch/transformers/f80a708b21cc9b248e8af5a630ad9f887326bbaf0098b9f354427b2463d55346.aeeaca90954dc20ffa2909de722cfbfd455c5bb16d480c5bdf6d7fe79c68c267
+01/27/2020 10:14:20 - INFO - transformers.modeling_utils -   Weights of XLMRobertaForSequenceClassification not initialized from pretrained model: ['classifier.dense.weight', 'classifier.dense.bias', 'classifier.out_proj.weight', 'classifier.out_proj.bias']
+01/27/2020 10:14:20 - INFO - transformers.modeling_utils -   Weights from pretrained model not used in XLMRobertaForSequenceClassification: ['lm_head.bias', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight']
+01/27/2020 10:14:20 - INFO - __main__ -   Training/evaluation parameters Namespace(adam_epsilon=1e-08, config_name='xlm-roberta-base', data_dir='./data/', device=device(type='cpu'), do_eval=True, do_lower_case=False, do_train=False, eval_all_checkpoints=False, evaluate_during_training=False, fp16=False, fp16_opt_level='O1', gradient_accumulation_steps=1, learning_rate=5e-05, local_rank=-1, logging_steps=50, max_grad_norm=1.0, max_seq_length=128, max_steps=-1, model_type='xlmroberta', n_gpu=0, num_train_epochs=1.0, output_dir='./model_saves/Transformer_xmlroberta/', output_mode='classification', save_steps=50, seed=42, server_ip='', server_port='', warmup_steps=0, weight_decay=0.0)
+01/27/2020 10:14:20 - INFO - transformers.tokenization_utils -   Model name './model_saves/Transformer_xmlroberta/' not found in model shortcut name list (xlm-roberta-base, xlm-roberta-large, xlm-roberta-large-finetuned-conll02-dutch, xlm-roberta-large-finetuned-conll02-spanish, xlm-roberta-large-finetuned-conll03-english, xlm-roberta-large-finetuned-conll03-german). Assuming './model_saves/Transformer_xmlroberta/' is a path or url to a directory containing tokenizer files.
+01/27/2020 10:14:20 - INFO - transformers.tokenization_utils -   loading file ./model_saves/Transformer_xmlroberta/sentencepiece.bpe.model
+01/27/2020 10:14:20 - INFO - transformers.tokenization_utils -   loading file ./model_saves/Transformer_xmlroberta/added_tokens.json
+01/27/2020 10:14:20 - INFO - transformers.tokenization_utils -   loading file ./model_saves/Transformer_xmlroberta/special_tokens_map.json
+01/27/2020 10:14:20 - INFO - transformers.tokenization_utils -   loading file ./model_saves/Transformer_xmlroberta/tokenizer_config.json
+01/27/2020 10:14:20 - INFO - __main__ -   Evaluate the following checkpoints: ['./model_saves/Transformer_xmlroberta/']
+01/27/2020 10:14:20 - INFO - transformers.configuration_utils -   loading configuration file ./model_saves/Transformer_xmlroberta/config.json
+01/27/2020 10:14:20 - INFO - transformers.configuration_utils -   Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 16,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 1,
+  "use_bfloat16": false,
+  "vocab_size": 250002
+}
+
+01/27/2020 10:14:20 - INFO - transformers.modeling_utils -   loading weights file ./model_saves/Transformer_xmlroberta/pytorch_model.bin
+01/27/2020 10:14:29 - INFO - __main__ -   Loading features from cached file ./data/cached_dev_xlm-roberta-base_128_dutchwords
+01/27/2020 10:14:29 - INFO - __main__ -   ***** Running evaluation  *****
+01/27/2020 10:14:29 - INFO - __main__ -     Num examples = 4764
+01/27/2020 10:14:29 - INFO - __main__ -     Batch size = 64
+Evaluating:  99%|█████████▊| 74/75 [12:50<00:10, 10.24s/it]report is            precision    recall  f1-score   support
+Evaluating: 100%|██████████| 75/75 [12:54<00:00,  8.44s/it]        0     0.0915    0.0382    0.0539     11418
+                                                                    1     0.0000    0.0000    0.0000     10260
+                                                            micro avg     0.0915    0.0201    0.0330     21678
+                                                            macro avg     0.0482    0.0201    0.0284     21678
+01/27/2020 10:27:25 - INFO - __main__ -   ***** Eval results  *****
+01/27/2020 10:27:25 - INFO - __main__ -     accuracy = 0.8187578715365239
+01/27/2020 10:27:25 - INFO - __main__ -     eval_loss = 0.4097028319040934
+01/27/2020 10:27:25 - INFO - __main__ -     f1 = 0.0329778382875728
+01/27/2020 10:27:25 - INFO - __main__ -     precision = 0.09151973131821999
+01/27/2020 10:27:25 - INFO - __main__ -     recall = 0.020112556508903034
+
+the exact accuracy is:  0.09151973131821999
+the hamming loss is:  0.18124212846347607
+the accuracy for the problem Persoonlijke_zorg
+acc is: 0.4534005037783375
+the accuracy for the problem Medicatie
+acc is: 0.5382031905961377
+the accuracy for the problem Huid
+acc is: 0.7176742233417296
+the accuracy for the problem Circulatie
+acc is: 0.6679261125104954
+the accuracy for the problem Voeding
+acc is: 0.8616708648194794
+the accuracy for the problem Urinewegfunctie
+acc is: 0.8358522250209908
+the accuracy for the problem Neuro_musculaire_skeletfunctie
+acc is: 0.8690176322418136
+the accuracy for the problem Cognitie
+acc is: 0.8700671704450041
+the accuracy for the problem Pijn
+acc is: 0.8881192275398825
+the accuracy for the problem Darmfunctie
+acc is: 0.8986146095717884
+the accuracy for the problem Geestelijke_gezondheid
+acc is: 0.9242233417296389
+the accuracy for the problem Ademhaling
+acc is: 0.9336691855583543
+the accuracy for the problem Mantelzorg_zorg_voor_kind_huisgenoot
+acc is: 0.9447942905121747
+the accuracy for the problem Fysieke_activiteit
+acc is: 0.9468933669185559
+the accuracy for the problem Zicht
+acc is: 0.9603274559193955
+the accuracy for the problem other
+acc is: 0.7896725440806045
+
+Process finished with exit code 0
+

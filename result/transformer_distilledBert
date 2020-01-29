@@ -1,0 +1,262 @@
+2.1.0
+{
+  "attention_probs_dropout_prob": 0.1,
+  "directionality": "bidi",
+  "early_stopping": true,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1
+  },
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 16,
+  "output_attentions": false,
+  "output_hidden_states": true,
+  "output_past": true,
+  "pooler_fc_size": 768,
+  "pooler_num_attention_heads": 12,
+  "pooler_num_fc_layers": 3,
+  "pooler_size_per_head": 128,
+  "pooler_type": "first_token_transform",
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 2,
+  "use_bfloat16": false,
+  "vocab_size": 119547
+}
+
+2020-01-23 12:08:04.832445: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-23 12:08:04.842127: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fc1b8699060 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-01-23 12:08:04.842153: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+Features: b'maar hij voelt zich wel goed. bloeddruk gemeten was deze maand nog niet gebeurd moet ste woensdag van de maand is aan de hoge kant .dhr heeft ook wat moeite met plassen prostaatklachten. is al een keer geholpen hieraan. hij zal hiervoor een keertje naar de ha gaan.', Target: [0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0]
+Features: b'mevr. had spierpijn van gisteren te sporten.', Target: [1 1 0 1 0 1 1 0 0 0 1 0 0 0 0 1]
+Features: b'huisarts belde ivm controlemoment s ochtends.', Target: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+Features: b'en spoot eh lantus. bij het spuiten zat dhr op een bloedvat bloedde even. blds .', Target: [0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0]
+Features: b'dhr spoot op bloedvaten bovenbeen bloedde even.', Target: [0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+({'input_ids': <tf.Tensor: shape=(128,), dtype=int32, numpy=
+array([   101,  11810,  10785,  17647,  11533,  12302,  16829,  24307,
+          119,  21484,  39688,  40310,  46503,  46765,  10115,  10134,
+        12032,  86137,  11765,  11670,  56533,  12986,  10162,  23047,
+        28780,  10112,  12796,  12457,  19115,  10145,  10104,  86137,
+        10124,  10727,  10104,  43099,  41820,    119,    172,  16757,
+        12365,  11187,  11803,  46912,  74832,  10428, 108832,  11284,
+        58922,  22444,  17856,    119,  10124,  10164,  10200,  19861,
+        46503,  32631,  12708,  13329,  12521,    119,  10785,  30639,
+       102073,  10200,  19861,  32521,  11422,  10104,  10228,  21681,
+          119,    102,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0],
+      dtype=int32)>, 'attention_mask': <tf.Tensor: shape=(128,), dtype=int32, numpy=
+array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=int32)>, 'token_type_ids': <tf.Tensor: shape=(128,), dtype=int32, numpy=
+array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=int32)>}, <tf.Tensor: shape=(16,), dtype=int64, numpy=array([0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])>)
+Train for 595 steps, validate for 148 steps
+WARNING:tensorflow:Gradients do not exist for variables ['tf_bert_model/bert/encoder/layer_._0/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._0/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._0/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._0/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._0/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._0/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._0/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._0/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._1/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._1/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._1/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._1/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._1/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._1/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._1/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._2/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._2/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._2/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._2/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._2/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._2/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._2/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._3/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._3/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._3/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._3/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._3/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._3/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._3/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._4/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._4/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._4/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._4/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._4/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._4/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._4/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._5/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._5/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._5/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._5/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._5/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._5/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._5/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._6/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._6/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._6/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._6/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._6/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._6/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._6/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._7/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._7/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._7/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._7/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._7/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._7/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._7/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._8/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._8/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._8/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._8/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._8/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._8/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._8/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._9/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._9/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._9/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._9/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._9/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._9/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._9/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._10/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._10/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._10/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._10/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._10/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._10/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._10/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._11/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._11/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._11/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._11/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._11/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._11/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._11/output/LayerNorm/beta:0', 'tf_bert_model/bert/pooler/dense/kernel:0', 'tf_bert_model/bert/pooler/dense/bias:0'] when minimizing the loss.
+WARNING:tensorflow:Gradients do not exist for variables ['tf_bert_model/bert/encoder/layer_._0/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._0/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._0/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._0/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._0/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._0/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._0/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._0/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._0/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._1/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._1/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._1/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._1/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._1/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._1/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._1/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._1/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._2/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._2/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._2/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._2/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._2/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._2/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._2/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._2/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._3/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._3/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._3/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._3/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._3/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._3/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._3/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._3/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._4/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._4/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._4/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._4/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._4/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._4/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._4/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._4/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._5/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._5/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._5/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._5/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._5/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._5/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._5/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._5/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._6/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._6/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._6/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._6/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._6/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._6/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._6/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._6/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._7/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._7/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._7/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._7/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._7/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._7/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._7/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._7/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._8/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._8/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._8/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._8/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._8/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._8/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._8/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._8/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._9/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._9/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._9/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._9/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._9/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._9/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._9/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._9/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._10/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._10/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._10/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._10/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._10/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._10/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._10/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._10/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/query/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/query/bias:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/key/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/key/bias:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/value/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/attention/self/value/bias:0', 'tf_bert_model/bert/encoder/layer_._11/attention/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/attention/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._11/attention/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._11/attention/output/LayerNorm/beta:0', 'tf_bert_model/bert/encoder/layer_._11/intermediate/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/intermediate/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._11/output/dense/kernel:0', 'tf_bert_model/bert/encoder/layer_._11/output/dense/bias:0', 'tf_bert_model/bert/encoder/layer_._11/output/LayerNorm/gamma:0', 'tf_bert_model/bert/encoder/layer_._11/output/LayerNorm/beta:0', 'tf_bert_model/bert/pooler/dense/kernel:0', 'tf_bert_model/bert/pooler/dense/bias:0'] when minimizing the loss.
+595/595 [==============================] - 617s 1s/step - loss: 0.7369 - accuracy: 0.8204 - val_loss: 0.6966 - val_accuracy: 0.8188
+
+2020-01-24 09:38:56.700641: W tensorflow/core/kernels/data/generator_dataset_op.cc:103] Error occurred when finalizing GeneratorDataset iterator: Cancelled: Operation was cancelled
+Eval at step 0.1355
+eval_loss: 0.03277300761881727
+f1 score:0.05278021228941474
+accuracy is:0.858625
+report is            precision    recall  f1-score   support
+        0     0.1355    0.0583    0.0815      4651
+        1     0.0000    0.0000    0.0000      3618
+
+micro avg     0.1355    0.0328    0.0528      8269
+macro avg     0.0762    0.0328    0.0458      8269
+the exact accuracy is:  0.1355
+the hamming loss is:  0.141375
+the accuracy for the problem Persoonlijke_zorg
+acc is: 0.69
+the accuracy for the problem Medicatie
+acc is: 0.526
+the accuracy for the problem Huid
+acc is: 0.8055
+the accuracy for the problem Circulatie
+acc is: 0.732
+the accuracy for the problem Voeding
+acc is: 0.8355
+the accuracy for the problem Urinewegfunctie
+acc is: 0.896
+the accuracy for the problem Neuro_musculaire_skeletfunctie
+acc is: 0.9185
+the accuracy for the problem Cognitie
+acc is: 0.8715
+the accuracy for the problem Pijn
+acc is: 0.909
+the accuracy for the problem Darmfunctie
+acc is: 0.94
+the accuracy for the problem Geestelijke_gezondheid
+acc is: 0.9425
+the accuracy for the problem Ademhaling
+acc is: 0.949
+the accuracy for the problem Mantelzorg_zorg_voor_kind_huisgenoot
+acc is: 0.964
+the accuracy for the problem Fysieke_activiteit
+acc is: 0.974
+the accuracy for the problem Zicht
+acc is: 0.958
+the accuracy for the problem other
+acc is: 0.8265
+
+## =====================================
+# DistillBert (fast version of the BERT)
+## =====================================
+Process finished with exit code 0
+2.1.0
+{
+  "activation": "gelu",
+  "attention_dropout": 0.1,
+  "dim": 768,
+  "dropout": 0.1,
+  "early_stopping": true,
+  "finetuning_task": null,
+  "hidden_dim": 3072,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1"
+  },
+  "initializer_range": 0.02,
+  "is_decoder": false,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1
+  },
+  "max_position_embeddings": 512,
+  "n_heads": 12,
+  "n_layers": 6,
+  "num_labels": 16,
+  "output_attentions": false,
+  "output_hidden_states": true,
+  "output_past": true,
+  "pruned_heads": {},
+  "qa_dropout": 0.1,
+  "seq_classif_dropout": 0.2,
+  "sinusoidal_pos_embds": false,
+  "tie_weights_": true,
+  "torchscript": false,
+  "use_bfloat16": false,
+  "vocab_size": 119547
+}
+
+2020-01-23 12:20:17.640100: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-01-23 12:20:17.668793: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-23 12:20:17.678997: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fa82af05ed0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-01-23 12:20:17.679037: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+Features: b'maar hij voelt zich wel goed. bloeddruk gemeten was deze maand nog niet gebeurd moet ste woensdag van de maand is aan de hoge kant .dhr heeft ook wat moeite met plassen prostaatklachten. is al een keer geholpen hieraan. hij zal hiervoor een keertje naar de ha gaan.', Target: [0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0]
+Features: b'mevr. had spierpijn van gisteren te sporten.', Target: [1 1 0 1 0 1 1 0 0 0 1 0 0 0 0 1]
+Features: b'huisarts belde ivm controlemoment s ochtends.', Target: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+Features: b'en spoot eh lantus. bij het spuiten zat dhr op een bloedvat bloedde even. blds .', Target: [0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0]
+Features: b'dhr spoot op bloedvaten bovenbeen bloedde even.', Target: [0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+({'input_ids': <tf.Tensor: shape=(128,), dtype=int32, numpy=
+array([   101,  11810,  10785,  17647,  11533,  12302,  16829,  24307,
+          119,  21484,  39688,  40310,  46503,  46765,  10115,  10134,
+        12032,  86137,  11765,  11670,  56533,  12986,  10162,  23047,
+        28780,  10112,  12796,  12457,  19115,  10145,  10104,  86137,
+        10124,  10727,  10104,  43099,  41820,    119,    172,  16757,
+        12365,  11187,  11803,  46912,  74832,  10428, 108832,  11284,
+        58922,  22444,  17856,    119,  10124,  10164,  10200,  19861,
+        46503,  32631,  12708,  13329,  12521,    119,  10785,  30639,
+       102073,  10200,  19861,  32521,  11422,  10104,  10228,  21681,
+          119,    102,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0,
+            0,      0,      0,      0,      0,      0,      0,      0],
+      dtype=int32)>, 'attention_mask': <tf.Tensor: shape=(128,), dtype=int32, numpy=
+array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=int32)>, 'token_type_ids': <tf.Tensor: shape=(128,), dtype=int32, numpy=
+array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=int32)>}, <tf.Tensor: shape=(16,), dtype=int64, numpy=array([0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])>)
+Train for 595 steps, validate for 148 steps
+595/595 [==============================] - 4061s 7s/step - loss: 0.7040 - accuracy: 0.8301 - val_loss: 0.6957 - val_accuracy: 0.8247
+
+Process finished with exit code 0
+
+evaluation:
+2020-01-24 09:31:18.875616: W tensorflow/core/kernels/data/generator_dataset_op.cc:103] Error occurred when finalizing GeneratorDataset iterator: Cancelled: Operation was cancelled
+Eval at step 0.1025
+eval_loss: 0.04958277905429919
+f1 score:0.06683511288613579
+accuracy is:0.834875
+report is            precision    recall  f1-score   support
+
+        1     0.1610    0.0890    0.1146      3618
+        0     0.0440    0.0189    0.0265      4651
+
+micro avg     0.1025    0.0496    0.0668      8269
+macro avg     0.0952    0.0496    0.0650      8269
+
+the exact accuracy is:  0.044
+the hamming loss is:  0.165125
+the accuracy for the problem Persoonlijke_zorg
+acc is: 0.31
+the accuracy for the problem Medicatie
+acc is: 0.526
+the accuracy for the problem Huid
+acc is: 0.8055
+the accuracy for the problem Circulatie
+acc is: 0.732
+the accuracy for the problem Voeding
+acc is: 0.8355
+the accuracy for the problem Urinewegfunctie
+acc is: 0.896
+the accuracy for the problem Neuro_musculaire_skeletfunctie
+acc is: 0.9185
+the accuracy for the problem Cognitie
+acc is: 0.8715
+the accuracy for the problem Pijn
+acc is: 0.909
+the accuracy for the problem Darmfunctie
+acc is: 0.94
+the accuracy for the problem Geestelijke_gezondheid
+acc is: 0.9425
+the accuracy for the problem Ademhaling
+acc is: 0.949
+the accuracy for the problem Mantelzorg_zorg_voor_kind_huisgenoot
+acc is: 0.964
+the accuracy for the problem Fysieke_activiteit
+acc is: 0.974
+the accuracy for the problem Zicht
+acc is: 0.958
+the accuracy for the problem other
+acc is: 0.8265
+

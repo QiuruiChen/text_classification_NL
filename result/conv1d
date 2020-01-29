@@ -1,0 +1,105 @@
+2.0.0
+2.0.0
+Indexing word vectors.
+Processing text dataset
+/Applications/condaSoftware/anaconda3/envs/tf2_copy/lib/python3.6/re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+preview 5 samples:
+ 0    mar voelt wel goed bloeddruk gemet dez maand g...
+5    spot eh lantus spuit zat dhr bloedvat bloedde ...
+6           dhr spot bloedvaten bovenbeen bloedde even
+7    dhr vroeg zat kwek terug kunn vind huisarts ge...
+8    sam huisarts freka belly button vervang visken...
+Name: comment_text, dtype: object
+Input Language; index to word mapping
+10 ----> mar
+80 ----> voelt
+5 ----> wel
+8 ----> goed
+725 ----> bloeddruk
+679 ----> gemet
+21 ----> dez
+837 ----> maand
+726 ----> gebeurd
+1741 ----> ste
+183 ----> woensdag
+837 ----> maand
+374 ----> hog
+497 ----> kant
+2 ----> dhr
+369 ----> moeit
+510 ----> plass
+25676 ----> prostaatklachten
+73 ----> ker
+62 ----> geholp
+3341 ----> hieran
+468 ----> hiervor
+2737 ----> keertje
+4 ----> nar
+103 ----> ha
+32 ----> gan
+how many word in vocabulary? 62022
+Loading data...
+Pad sequences (samples x time)
+x_train shape: (57732, 512)
+x_val shape: (14433, 512)
+x_test shape: (18042, 512)
+Preparing embedding matrix.
+load pretrained word embeddings!
+W0115 11:01:09.631819 4592670144 train.py:305] n_device: 1, distributed training: False, 16-bits training: False
+I0115 11:01:09.632357 4592670144 train.py:307] ***** Running training *****
+I0115 11:01:09.632412 4592670144 train.py:308]   Num examples = 57732
+I0115 11:01:09.632464 4592670144 train.py:309]   Num Epochs = 300
+I0115 11:01:09.632506 4592670144 train.py:310]   Instantaneous batch size per device = 64
+Training model.
+2020-01-15 11:01:09.672752: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-15 11:01:09.716738: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fe794a9b450 executing computations on platform Host. Devices:
+2020-01-15 11:01:09.716752: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+Model: "model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         [(None, 512)]             0
+_________________________________________________________________
+embedding (Embedding)        (None, 512, 300)          18606900
+_________________________________________________________________
+conv1d (Conv1D)              (None, 508, 128)          192128
+_________________________________________________________________
+max_pooling1d (MaxPooling1D) (None, 101, 128)          0
+_________________________________________________________________
+conv1d_1 (Conv1D)            (None, 97, 128)           82048
+_________________________________________________________________
+max_pooling1d_1 (MaxPooling1 (None, 19, 128)           0
+_________________________________________________________________
+conv1d_2 (Conv1D)            (None, 15, 128)           82048
+_________________________________________________________________
+global_max_pooling1d (Global (None, 128)               0
+_________________________________________________________________
+dense (Dense)                (None, 64)                8256
+_________________________________________________________________
+dropout (Dropout)            (None, 64)                0
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 65
+=================================================================
+Total params: 18,971,445
+Trainable params: 18,971,445
+Non-trainable params: 0
+_________________________________________________________________
+Train on 57732 samples, validate on 14433 samples
+Epoch 1/300
+   64/57732 [..............................] - ETA: 20:33 - loss: 0.7031 - accuracy: 0.64062020-01-15 11:01:17.641143: I tensorflow/core/profiler/lib/profiler_session.cc:184] Profiler session started.
+57732/57732 [==============================] - 425s 7ms/sample - loss: 0.4375 - accuracy: 0.8454 - val_loss: 0.4195 - val_accuracy: 0.8433
+Epoch 2/300
+57732/57732 [==============================] - 414s 7ms/sample - loss: 0.4047 - accuracy: 0.8465 - val_loss: 0.4291 - val_accuracy: 0.8446
+Epoch 3/300
+57732/57732 [==============================] - 427s 7ms/sample - loss: 0.3547 - accuracy: 0.8625 - val_loss: 0.4493 - val_accuracy: 0.8224
+Epoch 4/300
+57732/57732 [==============================] - 405s 7ms/sample - loss: 0.2847 - accuracy: 0.8942 - val_loss: 0.5354 - val_accuracy: 0.8094
+Epoch 5/300
+21632/57732 [==========>...................] - ETA: 3:54 - loss: 0.2146 - accuracy: 0.9239
+Process finished with exit code 137 (interrupted by signal 9: SIGKILL)
+
+
+## the result o transformer_encoder is (fast and high acc)
+the accuracy for the problem Voeding
+acc is: 0.8640552995391705
