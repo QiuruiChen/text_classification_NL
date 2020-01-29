@@ -19,7 +19,6 @@ pip install --upgrade google-cloud-storage
 cd /dev/shm
 sudo chmod -R 777 /dev/shm
 
-
 # delete all connent in vim
 :1,$d   
 
