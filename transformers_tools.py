@@ -2,7 +2,7 @@ import copy
 import csv
 import sys
 from transformers import *
-
+from transformers import modeling_utils
 import json
 import logging
 import os
@@ -11,7 +11,9 @@ import random
 import numpy as np
 import torch
 from tqdm import tqdm, trange
-
+from scipy.stats import logistic
+from seqeval import metrics
+from sklearn.metrics import hamming_loss,accuracy_score,f1_score,recall_score,precision_score
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
 try:
     from torch.utils.tensorboard import SummaryWriter
@@ -36,18 +38,7 @@ if is_tf_available():
 
 
 class InputFeatures(object):
-    """
-    A single set of features of data.
-
-    Args:
-        input_ids: Indices of input sequence tokens in the vocabulary.
-        attention_mask: Mask to avoid performing attention on padding token indices.
-            Mask values selected in ``[0, 1]``:
-            Usually  ``1`` for tokens that are NOT MASKED, ``0`` for MASKED (padded) tokens.
-        token_type_ids: Segment token indices to indicate first and second portions of the inputs.
-        label: Label corresponding to the input
-    """
-
+    # directly adopted from Transformers library
     def __init__(self, input_ids, attention_mask, token_type_ids, label):
         self.input_ids = input_ids
         self.attention_mask = attention_mask
@@ -66,31 +57,19 @@ class InputFeatures(object):
         """Serializes this instance to a JSON string."""
         return json.dumps(self.to_dict(), indent=2, sort_keys=True) + "\n"
 
-def glue_convert_examples_to_featuresMultilabel(examples, tokenizer, max_length=512, task=None, label_list=None, output_mode=None,
-                                      pad_on_left=False, pad_token=0, pad_token_segment_id=0, mask_padding_with_zero=True):
-    """
-    Loads a data file into a list of ``InputFeatures``
-
-    Args:
-        examples: List of ``InputExamples`` or ``tf.data.Dataset`` containing the examples.
-        tokenizer: Instance of a tokenizer that will tokenize the examples
-        max_length: Maximum example length
-        task: GLUE task
-        label_list: List of labels. Can be obtained from the processor using the ``processor.get_labels()`` method
-        output_mode: String indicating the output mode. Either ``regression`` or ``classification``
-        pad_on_left: If set to ``True``, the examples will be padded on the left rather than on the right (default)
-        pad_token: Padding token
-        pad_token_segment_id: The segment ID for the padding token (It is usually 0, but can vary such as for XLNet where it is 4)
-        mask_padding_with_zero: If set to ``True``, the attention mask will be filled by ``1`` for actual values
-            and by ``0`` for padded values. If set to ``False``, inverts it (``1`` for padded values, ``0`` for
-            actual values)
-
-    Returns:
-        If the ``examples`` input is a ``tf.data.Dataset``, will return a ``tf.data.Dataset``
-        containing the task-specific features. If the input is a list of ``InputExamples``, will return
-        a list of task-specific ``InputFeatures`` which can be fed to the model.
-
-    """
+def glue_convert_examples_to_featuresMultilabel(
+        examples, tokenizer,
+        max_length=512,
+        task=None,
+        label_list=None,
+        output_mode=None,
+        pad_on_left=False,
+        pad_token=0,
+        pad_token_segment_id=0,
+        mask_padding_with_zero=True,
+        features_return = 0
+    ):
+    #  modified based on glue_convert_examples_to_features
     is_tf_dataset = False
     if is_tf_available() and isinstance(examples, tf.data.Dataset):
         is_tf_dataset = True
@@ -163,7 +142,7 @@ def glue_convert_examples_to_featuresMultilabel(examples, tokenizer, max_length=
                               token_type_ids=token_type_ids,
                               label=label))
 
-    if is_tf_available() and is_tf_dataset:
+    if is_tf_available() and is_tf_dataset and (features_return == 0):
         def gen():
             for ex in features:
                 yield  ({'input_ids': ex.input_ids,
@@ -186,7 +165,6 @@ def glue_convert_examples_to_featuresMultilabel(examples, tokenizer, max_length=
 
 class DataProcessor(object):
     """Base class for data converters for sequence classification data sets."""
-
     @classmethod
     def _read_tsv(cls, input_file, quotechar=None):
         """Reads a tab separated value file."""
@@ -200,7 +178,7 @@ class DataProcessor(object):
             return lines
 
 class DutchwordsProcessor(DataProcessor):
-    """Processor for the dutch comment preprocess SST-2 data set (GLUE version)."""
+    "modified based on XnliProcessor"
 
     def get_example_from_tensor_dict(self, tensor_dict):
         """See base class."""
@@ -237,21 +215,8 @@ class DutchwordsProcessor(DataProcessor):
                 InputExample(guid=None, text_a=text_a, text_b=None, label=label))
         return examples
 
-
-
 class InputExample(object):
-    """
-    A single training/test example for simple sequence classification.
-
-    Args:
-        guid: Unique id for the example.
-        text_a: string. The untokenized text of the first sequence. For single
-        sequence tasks, only this sequence must be specified.
-        text_b: (Optional) string. The untokenized text of the second sequence.
-        Only must be specified for sequence pair tasks.
-        label: (Optional) string. The label of the example. This should be
-        specified for train and dev examples, but not for test examples.
-    """
+    # directly adopted from Transformers
     def __init__(self, guid, text_a, text_b=None, label=None):
         self.guid = guid
         self.text_a = text_a
@@ -277,34 +242,7 @@ class InputExample(object):
 
 class RobertaForSequenceClassificationMultilabel(BertPreTrainedModel):
     r"""
-        **labels**: (`optional`) ``torch.LongTensor`` of shape ``(batch_size,)``:
-            Labels for computing the sequence classification/regression loss.
-            Indices should be in ``[0, ..., config.num_labels]``.
-            If ``config.num_labels == 1`` a regression loss is computed (Mean-Square loss),
-            If ``config.num_labels > 1`` a classification loss is computed (Cross-Entropy).
-
-    Outputs: `Tuple` comprising various elements depending on the configuration (config) and inputs:
-        **loss**: (`optional`, returned when ``labels`` is provided) ``torch.FloatTensor`` of shape ``(1,)``:
-            Classification (or regression if config.num_labels==1) loss.
-        **logits**: ``torch.FloatTensor`` of shape ``(batch_size, config.num_labels)``
-            Classification (or regression if config.num_labels==1) scores (before SoftMax).
-        **hidden_states**: (`optional`, returned when ``config.output_hidden_states=True``)
-            list of ``torch.FloatTensor`` (one for the output of each layer + the output of the embeddings)
-            of shape ``(batch_size, sequence_length, hidden_size)``:
-            Hidden-states of the model at the output of each layer plus the initial embedding outputs.
-        **attentions**: (`optional`, returned when ``config.output_attentions=True``)
-            list of ``torch.FloatTensor`` (one for each layer) of shape ``(batch_size, num_heads, sequence_length, sequence_length)``:
-            Attentions weights after the attention softmax, used to compute the weighted average in the self-attention heads.
-
-    Examples::
-
-        tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
-        model = RobertaForSequenceClassification.from_pretrained('roberta-base')
-        input_ids = torch.tensor(tokenizer.encode("Hello, my dog is cute")).unsqueeze(0)  # Batch size 1
-        labels = torch.tensor([1]).unsqueeze(0)  # Batch size 1
-        outputs = model(input_ids, labels=labels)
-        loss, logits = outputs[:2]
-
+    modified by RobertaForSequenceClassification
     """
     config_class = RobertaConfig
     pretrained_model_archive_map = ROBERTA_PRETRAINED_MODEL_ARCHIVE_MAP
@@ -341,6 +279,41 @@ class RobertaForSequenceClassificationMultilabel(BertPreTrainedModel):
 
         return outputs  # (loss), logits, (hidden_states), (attentions)
 
+class XLMForSequenceClassificationMultiLabel(XLMPreTrainedModel):
+    def __init__(self, config):
+        super().__init__(config)
+        self.num_labels = config.num_labels
+
+        self.transformer = XLMModel(config)
+        self.sequence_summary = modeling_utils.SequenceSummary(config)
+
+        self.init_weights()
+
+    def forward( self, input_ids=None,  attention_mask=None, langs=None, token_type_ids=None,
+        position_ids=None, lengths=None, cache=None, head_mask=None, inputs_embeds=None, labels=None,):
+        transformer_outputs = self.transformer(
+            input_ids, attention_mask=attention_mask, langs=langs, token_type_ids=token_type_ids,
+            position_ids=position_ids, lengths=lengths, cache=cache, head_mask=head_mask,
+            inputs_embeds=inputs_embeds,)
+
+        output = transformer_outputs[0]
+        logits = self.sequence_summary(output)
+
+        outputs = (logits,) + transformer_outputs[1:]  # Keep new_mems and attention/hidden states if they are here
+
+        if labels is not None:
+            if self.num_labels == 1:
+                #  We are doing regression
+                loss_fct = torch.nn.MSELoss()
+                loss = loss_fct(logits.view(-1), labels.view(-1))
+            else:
+                # loss_fct = torch.nn.CrossEntropyLoss()
+                # loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
+                loss_fct = torch.nn.BCEWithLogitsLoss()
+                loss = loss_fct(logits.view(-1, self.num_labels), labels.type_as(logits)) # change the label into the same type of the logits
+            outputs = (loss,) + outputs
+
+        return outputs
 
 class RobertaClassificationHead(torch.nn.Module):
     """Head for sentence-level classification tasks."""
@@ -360,7 +333,6 @@ class RobertaClassificationHead(torch.nn.Module):
         x = self.out_proj(x)
         return x
 
-
 XLM_ROBERTA_PRETRAINED_MODEL_ARCHIVE_MAP = {
     'xlm-roberta-base': "https://s3.amazonaws.com/models.huggingface.co/bert/xlm-roberta-base-pytorch_model.bin",
     'xlm-roberta-large': "https://s3.amazonaws.com/models.huggingface.co/bert/xlm-roberta-large-pytorch_model.bin",
@@ -372,38 +344,91 @@ XLM_ROBERTA_PRETRAINED_MODEL_ARCHIVE_MAP = {
 
 # modify based on XLMRobertaForSequenceClassification
 class XLMRobertaForSequenceClassificationMultiLabel(RobertaForSequenceClassificationMultilabel):
-    r"""
-        **labels**: (`optional`) ``torch.LongTensor`` of shape ``(batch_size,)``:
-            Labels for computing the sequence classification/regression loss.
-            Indices should be in ``[0, ..., config.num_labels]``.
-            If ``config.num_labels == 1`` a regression loss is computed (Mean-Square loss),
-            If ``config.num_labels > 1`` a classification loss is computed (Cross-Entropy).
-
-    Outputs: `Tuple` comprising various elements depending on the configuration (config) and inputs:
-        **loss**: (`optional`, returned when ``labels`` is provided) ``torch.FloatTensor`` of shape ``(1,)``:
-            Classification (or regression if config.num_labels==1) loss.
-        **logits**: ``torch.FloatTensor`` of shape ``(batch_size, config.num_labels)``
-            Classification (or regression if config.num_labels==1) scores (before SoftMax).
-        **hidden_states**: (`optional`, returned when ``config.output_hidden_states=True``)
-            list of ``torch.FloatTensor`` (one for the output of each layer + the output of the embeddings)
-            of shape ``(batch_size, sequence_length, hidden_size)``:
-            Hidden-states of the model at the output of each layer plus the initial embedding outputs.
-        **attentions**: (`optional`, returned when ``config.output_attentions=True``)
-            list of ``torch.FloatTensor`` (one for each layer) of shape ``(batch_size, num_heads, sequence_length, sequence_length)``:
-            Attentions weights after the attention softmax, used to compute the weighted average in the self-attention heads.
-
-    Examples::
-
-        tokenizer = XLMRobertaTokenizer.from_pretrained('xlm-roberta-large')
-        model = XLMRobertaForSequenceClassification.from_pretrained('xlm-roberta-large')
-        input_ids = torch.tensor(tokenizer.encode("Schloß Nymphenburg ist sehr schön .")).unsqueeze(0)  # Batch size 1
-        labels = torch.tensor([1]).unsqueeze(0)  # Batch size 1
-        outputs = model(input_ids, labels=labels)
-        loss, logits = outputs[:2]
-
-    """
+    '''
+    modified by XLMRobertaForSequenceClassification
+    '''
     config_class = XLMRobertaConfig
     pretrained_model_archive_map = XLM_ROBERTA_PRETRAINED_MODEL_ARCHIVE_MAP
+
+class BertForSequenceClassificationMultiLabel(BertPreTrainedModel):
+    # mofified based on BertForSequenceClassification
+    def __init__(self, config):
+        super().__init__(config)
+        self.num_labels = config.num_labels
+
+        self.bert = BertModel(config)
+        self.dropout = torch.nn.Dropout(config.hidden_dropout_prob)
+        self.classifier = torch.nn.Linear(config.hidden_size, self.config.num_labels)
+
+        self.init_weights()
+
+    def forward(
+        self, input_ids=None, attention_mask=None, token_type_ids=None,
+        position_ids=None, head_mask=None, inputs_embeds=None, labels=None,):
+        outputs = self.bert(
+            input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids,
+            position_ids=position_ids, head_mask=head_mask, inputs_embeds=inputs_embeds,
+        )
+
+        pooled_output = outputs[1]
+
+        pooled_output = self.dropout(pooled_output)
+        logits = self.classifier(pooled_output)
+
+        outputs = (logits,) + outputs[2:]  # add hidden states and attention if they are here
+
+        if labels is not None:
+            if self.num_labels == 1:
+                #  We are doing regression
+                loss_fct = torch.nn.MSELoss()
+                loss = loss_fct(logits.view(-1), labels.view(-1))
+            else:
+                # loss_fct = torch.nn.CrossEntropyLoss()
+                # loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
+                loss_fct = torch.nn.BCEWithLogitsLoss()
+                loss = loss_fct(logits.view(-1, self.num_labels), labels.type_as(logits)) # change the label into the same type of the logits
+
+            outputs = (loss,) + outputs
+
+        return outputs  # (loss), logits, (hidden_states), (attentions)
+
+class DistilBertForSequenceClassificationMultiLabel(DistilBertPreTrainedModel):
+    def __init__(self, config):
+        super().__init__(config)
+        self.num_labels = config.num_labels
+
+        self.distilbert = DistilBertModel(config)
+        self.pre_classifier = torch.nn.Linear(config.dim, config.dim)
+        self.classifier = torch.nn.Linear(config.dim, config.num_labels)
+        self.dropout = torch.nn.Dropout(config.seq_classif_dropout)
+
+        self.init_weights()
+
+    def forward(self, input_ids=None, attention_mask=None, head_mask=None, inputs_embeds=None, labels=None):
+        distilbert_output = self.distilbert(
+            input_ids=input_ids, attention_mask=attention_mask, head_mask=head_mask, inputs_embeds=inputs_embeds
+        )
+        hidden_state = distilbert_output[0]  # (bs, seq_len, dim)
+        pooled_output = hidden_state[:, 0]  # (bs, dim)
+        pooled_output = self.pre_classifier(pooled_output)  # (bs, dim)
+        pooled_output = torch.nn.ReLU()(pooled_output)  # (bs, dim)
+        pooled_output = self.dropout(pooled_output)  # (bs, dim)
+        logits = self.classifier(pooled_output)  # (bs, dim)
+
+        outputs = (logits,) + distilbert_output[1:]
+        if labels is not None:
+            if self.num_labels == 1:
+                loss_fct = torch.nn.MSELoss()
+                loss = loss_fct(logits.view(-1), labels.view(-1))
+            else:
+                # loss_fct = torch.nn.CrossEntropyLoss()
+                # loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
+                loss_fct = torch.nn.BCEWithLogitsLoss()
+                loss = loss_fct(logits.view(-1, self.num_labels), labels.type_as(logits)) # change the label into the same type of the logits
+
+            outputs = (loss,) + outputs
+
+        return outputs  # (loss), logits, (hidden_states), (attentions)
 
 
 def load_and_cache_examples(args, task, tokenizer, evaluate=False):
@@ -454,7 +479,6 @@ def load_and_cache_examples(args, task, tokenizer, evaluate=False):
     dataset = TensorDataset(all_input_ids, all_attention_mask, all_token_type_ids, all_labels)
     return dataset
 
-
 def set_seed(args):
     random.seed(args.seed)
     np.random.seed(args.seed)
@@ -462,13 +486,13 @@ def set_seed(args):
     if args.n_gpu > 0:
         torch.cuda.manual_seed_all(args.seed)
 
-
 def train(args, train_dataset, model, tokenizer):
     """ Train the model """
     tb_writer = SummaryWriter()
 
     args.train_batch_size = args.train_batch_size * max(1, args.n_gpu)
-    train_sampler = RandomSampler(train_dataset) #if args.local_rank == -1 else DistributedSampler(train_dataset)
+    # train_sampler = RandomSampler(train_dataset) #if args.local_rank == -1 else DistributedSampler(train_dataset)
+    train_sampler = RandomSampler(train_dataset) #replacement=True, num_samples=4*2
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
 
     if args.max_steps > 0:
@@ -489,8 +513,7 @@ def train(args, train_dataset, model, tokenizer):
 
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = get_linear_schedule_with_warmup(
-        optimizer, num_warmup_steps=args.warmup_steps, num_training_steps=t_total
-    )
+        optimizer, num_warmup_steps=args.warmup_steps, num_training_steps=t_total)
 
     if args.fp16:
         try:
@@ -565,7 +588,7 @@ def train(args, train_dataset, model, tokenizer):
             loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
 
             if args.n_gpu > 1:
-                loss = loss.mean()  # mean() to average on multi-gpu parallel training
+                loss = loss.mean()  # average on multi-gpu parallel training
             if args.gradient_accumulation_steps > 1:
                 loss = loss / args.gradient_accumulation_steps
 
@@ -631,8 +654,10 @@ def train(args, train_dataset, model, tokenizer):
     return global_step, tr_loss / global_step
 
 
-
-
+def softmax(x):
+    """Compute softmax values for each sets of scores in x."""
+    e_x = np.exp(x - np.max(x))
+    return e_x / e_x.sum(axis=0) # only difference
 
 def evaluate(args, model, tokenizer, prefix=""):
     eval_outputs_dirs = (args.output_dir,)
@@ -646,20 +671,14 @@ def evaluate(args, model, tokenizer, prefix=""):
 
         args.eval_batch_size = args.eval_batch_size * max(1, args.n_gpu)
         # Note that DistributedSampler samples randomly
-        eval_dataset = eval_dataset
         eval_sampler = SequentialSampler(eval_dataset)
-
-        ## speedup:  only select 64*2 sampels by replacement
-        # eval_sampler = RandomSampler(eval_dataset, replacement=True, num_samples=64*2)
-
+        # speedup
+        # eval_sampler = RandomSampler(eval_dataset) #replacement=True, num_samples= args.train_batch_size*2
         eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.eval_batch_size)
 
         # multi-gpu eval
         if args.n_gpu > 1:
             model = torch.nn.DataParallel(model)
-        # if torch.cuda.is_available() and len(args.deviceIds) > 1:
-        #     model = torch.nn.DataParallel(model, device_ids=args.deviceIds).to(device=args.device)
-
         # Eval!
         logger.info("***** Running evaluation {} *****".format(prefix))
         logger.info("  Num examples = %d", len(eval_dataset))
@@ -679,49 +698,69 @@ def evaluate(args, model, tokenizer, prefix=""):
                         inputs["token_type_ids"] = (
                             batch[2] if args.model_type in ["bert", "xlnet", "albert"] else None
                         )  # XLM, DistilBERT, RoBERTa, and XLM-RoBERTa don't use segment_ids
-                        # outputs = model(inputs['input_ids'], labels=inputs['labels'])
                         outputs = model(**inputs)
                 elif args.task_type == "generation":
-                    outputs = model(batch[0],labels = batch[0])
+                    inputs = batch[0]
+                    outputs = model(inputs,labels = inputs)
                 tmp_eval_loss, logits = outputs[:2]
 
                 eval_loss += tmp_eval_loss.mean().item()
 
             nb_eval_steps += 1
+
             if preds is None:
-                preds = logits.detach().cpu().numpy()
-                out_label_ids = inputs["labels"].detach().cpu().numpy()
+                if args.task_type == "classification":
+                    # sigmoid
+                    preds = np.where(logistic.cdf(logits.detach().cpu().numpy()) > 0.5, 1, 0)
+                    out_label_ids = inputs["labels"].detach().cpu().numpy()
+                elif args.task_type == "generation":
+                    # softmax
+                    preds = torch.argmax(
+                        torch.nn.Softmax(dim=2)(logits.detach().cpu()),dim=2)
+                    preds = preds.numpy()
+                    # label equals to output
+                    out_label_ids = inputs.detach().cpu().numpy()
             else:
-                preds = np.append(preds, logits.detach().cpu().numpy(), axis=0)
-                out_label_ids = np.append(out_label_ids, inputs["labels"].detach().cpu().numpy(), axis=0)
+                if args.task_type == "classification":
+                    preds = np.append(preds, np.where(logistic.cdf(logits.detach().cpu().numpy()) > 0.5, 1, 0), axis=0)
+                    out_label_ids = np.append(out_label_ids, inputs["labels"].detach().cpu().numpy(), axis=0)
+                elif args.task_type == "generation":
+                    preds = np.append(preds, torch.argmax(
+                        torch.nn.Softmax(dim=2)(logits.detach().cpu()),dim=2).numpy(), axis=0)
+                    out_label_ids = np.append(out_label_ids,  inputs.detach().cpu().numpy(), axis=0)
 
         eval_loss = eval_loss / nb_eval_steps
-        if args.output_mode == "regression":
-            preds = np.squeeze(preds)
 
-        from scipy.stats import logistic
-        preds = np.where(logistic.cdf(preds) > 0.5, 1, 0)
-        y_true = [[str(ele) for ele in label]for label in out_label_ids]
-        y_pred = [[str(ele) for ele in pred]for pred in preds]
-        report = metrics.classification_report(y_true, y_pred, digits=4)
+        # if args.output_mode == "regression":
+        #     preds = np.squeeze(preds)
 
-        print("report is", report)
-        result = {"accuracy": metrics.accuracy_score(y_true,y_pred),
-                  "precision":metrics.precision_score(y_true, y_pred),
-                  "recall": metrics.recall_score(y_true, y_pred),
-                  "eval_loss":eval_loss,
-                  "f1":metrics.f1_score(y_true, y_pred)}
+        if args.task_type == "classification":
+            y_true = [[str(ele) for ele in label]for label in out_label_ids]
+            y_pred = [[str(ele) for ele in pred]for pred in preds]
+            report = metrics.classification_report(y_true, y_pred, digits=4)
+            print("report is", report)
+            result = {"accuracy": metrics.accuracy_score(y_true,y_pred),
+                      "precision":metrics.precision_score(y_true, y_pred),
+                      "recall": metrics.recall_score(y_true, y_pred),
+                      "eval_loss":eval_loss,
+                      "f1":metrics.f1_score(y_true, y_pred)}
 
-        from sklearn.metrics import hamming_loss,accuracy_score
-        print("the exact accuracy is: ",accuracy_score(out_label_ids, preds))
-        print("the hamming loss is: ", hamming_loss(out_label_ids, preds))
+            print("the exact accuracy is: ",accuracy_score(out_label_ids, preds))
+            print("the hamming loss is: ", hamming_loss(out_label_ids, preds))
 
-        prob_list_names = ['Persoonlijke_zorg', 'Medicatie', 'Huid', 'Circulatie', 'Voeding','Urinewegfunctie', 'Neuro_musculaire_skeletfunctie', 'Cognitie', 'Pijn',
-        'Darmfunctie', 'Geestelijke_gezondheid', 'Ademhaling', 'Mantelzorg_zorg_voor_kind_huisgenoot', 'Fysieke_activiteit', 'Zicht','other']
+            prob_list_names = ['Persoonlijke_zorg', 'Medicatie', 'Huid', 'Circulatie', 'Voeding','Urinewegfunctie', 'Neuro_musculaire_skeletfunctie', 'Cognitie', 'Pijn',
+            'Darmfunctie', 'Geestelijke_gezondheid', 'Ademhaling', 'Mantelzorg_zorg_voor_kind_huisgenoot', 'Fysieke_activiteit', 'Zicht','other']
 
-        for i in range(0,16):
-            print("the accuracy for the problem",prob_list_names[i])
-            print("acc is:", str((out_label_ids[:,i]== preds[:,i]).sum() / out_label_ids.shape[0]))
+            for i in range(0,16):
+                print("the accuracy for the problem",prob_list_names[i])
+                print("acc is:", str((out_label_ids[:,i]== preds[:,i]).sum() / out_label_ids.shape[0]))
+        elif args.task_type == "generation":
+            # could also use BLEU, which counts n-gram overlap between the candidate and the reference
+            result = {"accuracy": np.mean([accuracy_score(out_label_id,preds[idx]) for idx,out_label_id in enumerate(out_label_ids)]),
+                      "precision":np.mean([precision_score(out_label_id,preds[idx],average='weighted') for idx,out_label_id in enumerate(out_label_ids)]),
+                      "recall":np.mean([recall_score(out_label_id,preds[idx],average='weighted') for idx,out_label_id in enumerate(out_label_ids)]),
+                      "eval_loss":eval_loss,
+                      "f1": np.mean([f1_score(out_label_id,preds[idx],average='weighted') for idx,out_label_id in enumerate(out_label_ids)])}
 
         results.update(result)
 
@@ -733,4 +772,3 @@ def evaluate(args, model, tokenizer, prefix=""):
                 writer.write("%s = %s\n" % (key, str(result[key])))
 
     return results
-

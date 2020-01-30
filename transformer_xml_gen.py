@@ -6,6 +6,7 @@ import argparse
 import logging
 import torch
 from transformers_tools import *
+from transformers import *
 
 processor = DutchwordsProcessor()
 logger = logging.getLogger(__name__)
@@ -46,10 +47,10 @@ def main():
     parser.add_argument( "--max_steps",default=-1,type=int, help="If > 0: set total number of training steps to perform. Override num_train_epochs.", )
     parser.add_argument("--eval_batch_size", default= 32, type=int, help="batch size during evaluation")
     parser.add_argument("--train_batch_size", default= 32, type=int, help="batch size during training")
-    parser.add_argument("--warmup_steps", default=30000, type=int, help="Linear warmup over warmup_steps.")
+    parser.add_argument("--warmup_steps", default=10, type=int, help="Linear warmup over warmup_steps.")
 
     parser.add_argument("--logging_steps", type=int, default=50, help="Log every X updates steps.")
-    parser.add_argument("--save_steps", type=int, default=50, help="Save checkpoint every X updates steps.")
+    parser.add_argument("--save_steps", type=int, default=0, help="Save checkpoint every X updates steps.")
     parser.add_argument("--seed", type=int, default=42, help="random seed for initialization")
 
     args = parser.parse_args()
@@ -58,22 +59,6 @@ def main():
     args.n_gpu = torch.cuda.device_count()
     device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
     args.device = device
-    # if args.n_gpu > 0:
-    #     args.deviceIds = list(range(args.n_gpu))
-    # else:
-    #     args.deviceIds = []
-    #
-    # if torch.cuda.is_available() and len(args.deviceIds) > 0:
-    #     # remove any device which doesn't exists
-    #     args.deviceIds = [int(d) for d in args.deviceIds if 0 <= int(d) < torch.cuda.device_count()]
-    #     # set args.deviceIds[0] (the master node) as the current device
-    #     torch.cuda.set_device(args.deviceIds[0])
-    #     args.device = torch.device("cuda")
-    # else:
-    #     args.device = torch.device('cpu')
-
-
-    print("how many gpu is available?", args.n_gpu)
 
     # args.device = device
     # Setup logging
@@ -83,11 +68,16 @@ def main():
         level=logging.INFO,
     )
     set_seed(args)
+    logging.info("%d gpus avaliable", args.n_gpu)
 
+    # until now only XLM model can generate dutch
     config = XLMConfig().from_pretrained('xlm-mlm-17-1280')
     config.lang_id = config.lang2id['nl']
+    config.early_stopping = True
     tokenizer = XLMTokenizer.from_pretrained('xlm-mlm-17-1280',config = config)
     model = XLMWithLMHeadModel.from_pretrained('xlm-mlm-17-1280', config = config)
+
+
     model.to(args.device)
 
     logger.info("Training/evaluation parameters %s", args)
@@ -112,6 +102,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
