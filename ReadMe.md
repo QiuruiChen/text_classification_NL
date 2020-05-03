@@ -1,9 +1,10 @@
 # Text classification
 
-Classifying patient illness name by nurse notes (Dutch). \
+Classifying patient illness name by nurse notes (Dutch).
 
-Two type methods are applied: \
-1. Using non-transformer methods:
+## Method: 
+Two type methods are applied:
+1. <b> Using non-transformer methods </b>:
    - preprocessing text
    - applying:
      - word embedding + globalAveraged1D
@@ -11,13 +12,13 @@ Two type methods are applied: \
      - Or word embedding + convolutional 2D
      - Or bidirectional LSTM
      - Or FastText (n-gram based on character-level)
-2. Transformer-based methods:
+2. <b> Transformer-based methods</b>:
    - BERT
    - XLMRoberta
 
 ## Result:
 Below shows the last attention layer for BERT:\
-![transformer_bert_layer11](./result/transformer_bert_layer11.png)
+![transformer_bert_layer11](./result/transformer_bert_layer11.png =100x20)
 
 ## File structure:
 - data:
