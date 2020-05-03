@@ -475,8 +475,8 @@ def main(_):
     # print ("prediction is: ",predictions)
 
 if __name__ == "__main__":
-    # flags.mark_flag_as_required("data_dir")
-    # flags.mark_flag_as_required("output_dir")
-    # flags.mark_flag_as_required("model_name_or_path")
-    # flags.mark_flag_as_required("model_type")
+    flags.mark_flag_as_required("data_dir")
+    flags.mark_flag_as_required("output_dir")
+    flags.mark_flag_as_required("model_name_or_path")
+    flags.mark_flag_as_required("model_type")
     app.run(main)

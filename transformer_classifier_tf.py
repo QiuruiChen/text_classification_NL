@@ -31,30 +31,23 @@ except ImportError:
 ALL_MODELS = sum(
     (tuple(conf.pretrained_config_archive_map.keys()) for conf in (BertConfig, RobertaConfig, DistilBertConfig)), ()
 )
-
 MODEL_CLASSES = {
     "bert": (BertConfig, TFBertForSequenceClassification, BertTokenizer),
     "xlm": (XLMConfig, TFXLMForSequenceClassification, XLMTokenizer),
     "distilbert": (DistilBertConfig, TFDistilBertForSequenceClassification, DistilBertTokenizer),
 }
-
 flags.DEFINE_string(
     "data_dir", './data/', "The input data dir. Should contain the .conll files (or other data files) " "for the task."
 )
-
 flags.DEFINE_string("model_type", "bert", "Model type selected in the list: " + ", ".join(MODEL_CLASSES.keys()))
-
 flags.DEFINE_string(
     "model_name_or_path", "bert-base-multilingual-cased",
     "Path to pre-trained model or shortcut name selected in the list: " + ", ".join(ALL_MODELS),
 )
 
 flags.DEFINE_string("output_dir", "./model_saves/transformer_bert_classify/", "The output directory where the model checkpoints will be written.")
-
 flags.DEFINE_string("config_name", "bert-base-multilingual-cased", "Pretrained config name or path if not the same as model_name")
-
 flags.DEFINE_string("tokenizer_name", "bert-base-multilingual-cased", "Pretrained tokenizer name or path if not the same as model_name")
-
 flags.DEFINE_string("cache_dir", "../download_models/transformer_bert_classify", "Where do you want to store the pre-trained models downloaded from s3")
 ""
 
@@ -593,8 +586,8 @@ def main(_):
 
 
 if __name__ == "__main__":
-    # flags.mark_flag_as_required("data_dir")
-    # flags.mark_flag_as_required("output_dir")
-    # flags.mark_flag_as_required("model_name_or_path")
-    # flags.mark_flag_as_required("model_type")
+    flags.mark_flag_as_required("data_dir")
+    flags.mark_flag_as_required("output_dir")
+    flags.mark_flag_as_required("model_name_or_path")
+    flags.mark_flag_as_required("model_type")
     app.run(main)
