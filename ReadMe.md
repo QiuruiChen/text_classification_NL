@@ -18,7 +18,7 @@ Two type methods are applied:
 
 ## Result:
 Below shows the last attention layer for BERT:\
-<img src="./result/transformer_bert_layer11.png" alt="drawing" style="height:10px;width:20px;"/>
+<img src="./result/transformer_bert_layer11.png" alt="drawing" width="10" height="15"/>
 
 ## File structure:
 - data:
