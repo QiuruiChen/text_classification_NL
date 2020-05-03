@@ -17,7 +17,7 @@ Two type methods are applied:
    - XLMRoberta
 
 ## Result:
-Below shows the last attention layer for BERT:\
+Below picture shows the last attention layer for BERT, compared with the [first attention layer](./result/transformer_bert_layer0.png), we can see attention palys a role for classying sentences:\
 <img src="./result/transformer_bert_layer11.png" alt="drawing" width="500px" height="1000px"/>
 
 ## File structure:
