@@ -15,6 +15,10 @@ Two type methods are applied: \
    - BERT
    - XLMRoberta
 
+## Result:
+Below shows the last attention layer for BERT:
+![transformer_bert_layer11](result/transformer_bert_layer11.png =250x)
+
 ## File structure:
 - data:
   - [transformer_bert_data_gen.py](data/transformer_bert_data_gen.py): generating train/dev/test text for BERT
@@ -38,5 +42,6 @@ Two type methods are applied: \
      - Or word embedding + convolutional 2D: `bashpython --train_type conv2d`
      - Or bidirectional LSTM: `python --train_type bidireLSTM`
      - Or FastText (n-gram based on character-level): `python --fasttext True`
+
 
 
