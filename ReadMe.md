@@ -33,22 +33,10 @@ Two type methods are applied: \
   - help functions for transformers
 - [word_embedding_methods.py](word_embedding_methods.py):
   -  non-transformer methods:
-     - word embedding + globalAveraged1D
-       ```bash
-      python --train_type simple
-      ```
-     - Or word embedding + convolutional 1D:
-      ```bash
-      python --train_type conv1d
-      ```
-     - Or word embedding + convolutional 2D
-      ```bash
-      python --train_type conv2d
-      ```
-     - Or bidirectional LSTM:
-      ```bash
-      python --train_type bidireLSTM
-      ```
+     - word embedding + globalAveraged1D: `python --train_type simple`
+     - Or word embedding + convolutional 1D: `python --train_type conv1d`
+     - Or word embedding + convolutional 2D: `bashpython --train_type conv2d`
+     - Or bidirectional LSTM: `python --train_type bidireLSTM`
      - Or FastText (n-gram based on character-level): `python --fasttext True`
 
 
